@@ -16,10 +16,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * JUnit test for JasperReportGenerator
- * This version of testing can be tested without full JasperReports functionality
+ * JUnit test for JasperReportGenerator with negative testing
  * @author martin
  */
+
 public class JasperReportGeneratorTest {
     
     private static DatabaseConnection databaseConnection;

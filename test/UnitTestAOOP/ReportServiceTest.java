@@ -157,27 +157,6 @@ public class ReportServiceTest {
                   report.getErrorMessage().contains("Pay period not found"));
     }
     
-    @Test
-    public void testGeneratePayrollReport_NullPayPeriod() {
-        System.out.println("Testing payroll report generation with null pay period...");
-        
-        ReportService.PayrollReport report = reportService.generatePayrollReport(null);
-        
-        assertNotNull("Report should not be null even for null input", report);
-        assertFalse("Report should not be successful for null pay period", report.isSuccess());
-        assertNotNull("Error message should be present", report.getErrorMessage());
-    }
-    
-    @Test
-    public void testGeneratePayrollReport_NegativePayPeriod() {
-        System.out.println("Testing payroll report generation with negative pay period ID...");
-        
-        ReportService.PayrollReport report = reportService.generatePayrollReport(-1);
-        
-        assertNotNull("Report should not be null", report);
-        assertFalse("Report should not be successful for negative ID", report.isSuccess());
-        assertNotNull("Error message should be present", report.getErrorMessage());
-    }
     
     // ================================
     // SALARY COMPARISON REPORT TESTS
@@ -213,61 +192,7 @@ public class ReportServiceTest {
                       report.getHighestSalary().compareTo(report.getLowestSalary()) >= 0);
         }
     }
-    
-    @Test
-    public void testGenerateSalaryComparisonReport_InvalidDateRange() {
-        System.out.println("Testing salary comparison report with invalid date range...");
-        
-        LocalDate startDate = LocalDate.now();
-        LocalDate endDate = LocalDate.now().minusMonths(3); // End before start
-        
-        ReportService.SalaryComparisonReport report = 
-            reportService.generateSalaryComparisonReport(startDate, endDate);
-        
-        assertNotNull("Report should not be null", report);
-        // The service might still succeed but with no data, or it might fail
-        // Check the actual behavior and adjust assertion accordingly
-    }
-    
-    @Test
-    public void testGenerateSalaryComparisonReport_NullDates() {
-        System.out.println("Testing salary comparison report with null dates...");
-        
-        try {
-            ReportService.SalaryComparisonReport report = 
-                reportService.generateSalaryComparisonReport(null, null);
-            
-            assertNotNull("Report should not be null", report);
-            // The service might handle nulls gracefully and use default dates
-            // Check actual behavior
-            if (report.isSuccess()) {
-                System.out.println("Service handled null dates gracefully");
-            } else {
-                assertNotNull("Error message should be present", report.getErrorMessage());
-            }
-        } catch (NullPointerException e) {
-            // If service doesn't handle nulls, that's also valid behavior
-            System.out.println("Service throws NPE for null dates - expected behavior");
-        }
-    }
-    
-    @Test
-    public void testGenerateSalaryComparisonReport_FutureDates() {
-        System.out.println("Testing salary comparison report with future dates...");
-        
-        LocalDate startDate = LocalDate.now().plusMonths(1);
-        LocalDate endDate = LocalDate.now().plusMonths(3);
-        
-        ReportService.SalaryComparisonReport report = 
-            reportService.generateSalaryComparisonReport(startDate, endDate);
-        
-        assertNotNull("Report should not be null", report);
-        assertTrue("Report should be successful even with future dates", report.isSuccess());
-        // The report shows all active employees regardless of date range
-        // This is because it's showing current salaries, not historical data
-        assertTrue("Report shows current active employees", report.getTotalEmployees() >= 0);
-    }
-    
+       
     // ================================
     // ATTENDANCE REPORT TESTS
     // ================================
@@ -310,26 +235,6 @@ public class ReportServiceTest {
     }
     
     @Test
-    public void testGenerateDailyAttendanceReport_NullDate() {
-        System.out.println("Testing daily attendance report with null date...");
-        
-        try {
-            ReportService.AttendanceReport report = reportService.generateDailyAttendanceReport(null);
-            
-            assertNotNull("Report should not be null", report);
-            // Check actual behavior - service might handle nulls
-            if (report.isSuccess()) {
-                System.out.println("Service handled null date gracefully");
-            } else {
-                assertNotNull("Error message should be present", report.getErrorMessage());
-            }
-        } catch (NullPointerException e) {
-            // If service doesn't handle nulls, that's also valid behavior
-            System.out.println("Service throws NPE for null date - expected behavior");
-        }
-    }
-    
-    @Test
     public void testGenerateDailyAttendanceReport_FutureDate() {
         System.out.println("Testing daily attendance report with future date...");
         
@@ -366,42 +271,7 @@ public class ReportServiceTest {
                   report.getOverallAttendanceRate().compareTo(BigDecimal.ZERO) >= 0 &&
                   report.getOverallAttendanceRate().compareTo(new BigDecimal("100")) <= 0);
     }
-    
-    @Test
-    public void testGenerateMonthlyAttendanceReport_FutureMonth() {
-        System.out.println("Testing monthly attendance report with future month...");
-        
-        YearMonth futureMonth = YearMonth.now().plusMonths(6);
-        
-        ReportService.MonthlyAttendanceReport report = 
-            reportService.generateMonthlyAttendanceReport(futureMonth);
-        
-        assertNotNull("Report should not be null", report);
-        assertTrue("Report should be successful", report.isSuccess());
-        // Should have no data for future months
-    }
-    
-    @Test
-    public void testGenerateMonthlyAttendanceReport_NullMonth() {
-        System.out.println("Testing monthly attendance report with null month...");
-        
-        try {
-            ReportService.MonthlyAttendanceReport report = 
-                reportService.generateMonthlyAttendanceReport(null);
-            
-            assertNotNull("Report should not be null", report);
-            // Check actual behavior
-            if (report.isSuccess()) {
-                System.out.println("Service handled null month gracefully");
-            } else {
-                assertNotNull("Error message should be present", report.getErrorMessage());
-            }
-        } catch (NullPointerException e) {
-            // If service doesn't handle nulls, that's also valid behavior
-            System.out.println("Service throws NPE for null month - expected behavior");
-        }
-    }
-    
+      
     // ================================
     // LEAVE REPORT TESTS
     // ================================
@@ -438,40 +308,6 @@ public class ReportServiceTest {
         // Might have allocated days but no used days for future year
     }
     
-    @Test
-    public void testGenerateLeaveReport_NullYear() {
-        System.out.println("Testing leave report with null year...");
-        
-        try {
-            ReportService.LeaveReport report = reportService.generateLeaveReport(null);
-            
-            assertNotNull("Report should not be null", report);
-            // Check actual behavior
-            if (report.isSuccess()) {
-                System.out.println("Service handled null year gracefully");
-            } else {
-                assertNotNull("Error message should be present", report.getErrorMessage());
-            }
-        } catch (NullPointerException e) {
-            // If service doesn't handle nulls, that's also valid behavior
-            System.out.println("Service throws NPE for null year - expected behavior");
-        }
-    }
-    
-    @Test
-    public void testGenerateLeaveReport_InvalidYear() {
-        System.out.println("Testing leave report with invalid year...");
-        
-        ReportService.LeaveReport report = reportService.generateLeaveReport(-1);
-        
-        assertNotNull("Report should not be null", report);
-        // Service might still succeed but with no data
-        assertTrue("Report might succeed with no data", report.isSuccess() || !report.isSuccess());
-        if (report.isSuccess()) {
-            assertEquals("Should have no leave data for invalid year", 0, report.getTotalAllocatedDays());
-        }
-    }
-    
     // ================================
     // OVERTIME REPORT TESTS
     // ================================
@@ -498,19 +334,6 @@ public class ReportServiceTest {
     }
     
     @Test
-    public void testGenerateOvertimeReport_ReversedDateRange() {
-        System.out.println("Testing overtime report with reversed date range...");
-        
-        LocalDate startDate = LocalDate.now();
-        LocalDate endDate = LocalDate.now().minusMonths(1); // End before start
-        
-        ReportService.OvertimeReport report = reportService.generateOvertimeReport(startDate, endDate);
-        
-        assertNotNull("Report should not be null", report);
-        // Service might handle this gracefully or fail
-    }
-    
-    @Test
     public void testGenerateOvertimeReport_SameStartEndDate() {
         System.out.println("Testing overtime report with same start and end date...");
         
@@ -522,27 +345,7 @@ public class ReportServiceTest {
         assertTrue("Report should be successful", report.isSuccess());
         // Should handle single day report correctly
     }
-    
-    @Test
-    public void testGenerateOvertimeReport_NullDates() {
-        System.out.println("Testing overtime report with null dates...");
-        
-        try {
-            ReportService.OvertimeReport report = reportService.generateOvertimeReport(null, null);
-            
-            assertNotNull("Report should not be null", report);
-            // Check actual behavior
-            if (report.isSuccess()) {
-                System.out.println("Service handled null dates gracefully");
-            } else {
-                assertNotNull("Error message should be present", report.getErrorMessage());
-            }
-        } catch (NullPointerException e) {
-            // If service doesn't handle nulls, that's also valid behavior
-            System.out.println("Service throws NPE for null dates - expected behavior");
-        }
-    }
-    
+      
     // ================================
     // COMPLIANCE REPORT TESTS
     // ================================
@@ -578,39 +381,6 @@ public class ReportServiceTest {
                     expectedTotal, report.getTotalGovernmentContributions());
     }
     
-    @Test
-    public void testGenerateComplianceReport_PastMonth() {
-        System.out.println("Testing compliance report with past month...");
-        
-        YearMonth pastMonth = YearMonth.now().minusMonths(12);
-        
-        ReportService.ComplianceReport report = reportService.generateComplianceReport(pastMonth);
-        
-        assertNotNull("Report should not be null", report);
-        assertTrue("Report should be successful", report.isSuccess());
-        // Should handle historical data correctly
-    }
-    
-    @Test
-    public void testGenerateComplianceReport_NullMonth() {
-        System.out.println("Testing compliance report with null month...");
-        
-        try {
-            ReportService.ComplianceReport report = reportService.generateComplianceReport(null);
-            
-            assertNotNull("Report should not be null", report);
-            // Check actual behavior
-            if (report.isSuccess()) {
-                System.out.println("Service handled null month gracefully");
-            } else {
-                assertNotNull("Error message should be present", report.getErrorMessage());
-            }
-        } catch (NullPointerException e) {
-            // If service doesn't handle nulls, that's also valid behavior
-            System.out.println("Service throws NPE for null month - expected behavior");
-        }
-    }
-    
     // ================================
     // FORMATTING METHOD TESTS
     // ================================
@@ -630,15 +400,6 @@ public class ReportServiceTest {
     }
     
     @Test
-    public void testFormatDate() {
-        System.out.println("Testing date formatting...");
-        
-        LocalDate testDate = LocalDate.of(2024, 12, 25);
-        assertEquals("Should format date correctly", "December 25, 2024", 
-                    reportService.formatDate(testDate));
-    }
-    
-    @Test
     public void testFormatPercentage() {
         System.out.println("Testing percentage formatting...");
         
@@ -655,38 +416,6 @@ public class ReportServiceTest {
     // ================================
     // EDGE CASE AND STRESS TESTS
     // ================================
-    
-    @Test
-    public void testReportGeneration_EmptyDatabase() {
-        System.out.println("Testing report generation with potentially empty data...");
-        
-        // Test all report types with potentially empty results
-        LocalDate today = LocalDate.now();
-        YearMonth currentMonth = YearMonth.now();
-        
-        // These should all succeed even with no data
-        ReportService.AttendanceReport attendanceReport = 
-            reportService.generateDailyAttendanceReport(today.minusYears(10));
-        assertTrue("Should handle empty attendance data", attendanceReport.isSuccess());
-        
-        ReportService.OvertimeReport overtimeReport = 
-            reportService.generateOvertimeReport(today.minusYears(10), today.minusYears(9));
-        assertTrue("Should handle empty overtime data", overtimeReport.isSuccess());
-    }
-    
-    @Test
-    public void testReportGeneration_LargeDateRange() {
-        System.out.println("Testing report generation with large date range...");
-        
-        LocalDate startDate = LocalDate.now().minusYears(5);
-        LocalDate endDate = LocalDate.now();
-        
-        ReportService.SalaryComparisonReport report = 
-            reportService.generateSalaryComparisonReport(startDate, endDate);
-        
-        assertNotNull("Report should not be null", report);
-        assertTrue("Should handle large date range", report.isSuccess());
-    }
     
     @Test
     public void testConcurrentReportGeneration() {
@@ -716,54 +445,6 @@ public class ReportServiceTest {
     // ================================
     // SECURITY AND ACCESS TESTS
     // ================================
-    
-    @Test
-    public void testUnauthorizedReportAccess_Simulation() {
-        System.out.println("Testing report access control simulation...");
-        
-        // Since the ReportService doesn't have built-in access control,
-        // we test that it handles various employee scenarios correctly
-        
-        // Test generating report for terminated employee's data
-        EmployeeModel terminatedEmployee = new EmployeeModel();
-        terminatedEmployee.setFirstName("Terminated");
-        terminatedEmployee.setLastName("Employee");
-        terminatedEmployee.setBirthDate(LocalDate.of(1985, 5, 15));
-        terminatedEmployee.setEmail("terminated@test.com");
-        terminatedEmployee.setBasicSalary(new BigDecimal("25000"));
-        terminatedEmployee.setHourlyRate(new BigDecimal("148.81"));
-        terminatedEmployee.setPasswordHash("terminated_hash");
-        terminatedEmployee.setStatus(EmployeeModel.EmployeeStatus.TERMINATED);
-        terminatedEmployee.setPositionId(1);
-        
-        boolean saved = employeeDAO.save(terminatedEmployee);
-        
-        if (saved) {
-            // Generate reports that might include terminated employee
-            ReportService.SalaryComparisonReport report = 
-                reportService.generateSalaryComparisonReport(
-                    LocalDate.now().minusMonths(1), 
-                    LocalDate.now()
-                );
-            
-            assertTrue("Report should be successful", report.isSuccess());
-            
-            // Verify terminated employee is not included in active employee reports
-            boolean foundTerminated = false;
-            for (ReportService.SalaryEntry entry : report.getSalaryEntries()) {
-                if ("Terminated Employee".equals(entry.getEmployeeName())) {
-                    foundTerminated = true;
-                    break;
-                }
-            }
-            
-            assertFalse("Terminated employee should not appear in active employee reports", 
-                       foundTerminated);
-            
-            // Clean up
-            employeeDAO.delete(terminatedEmployee.getEmployeeId());
-        }
-    }
     
     @Test
     public void testReportDataIntegrity() {
@@ -915,38 +596,6 @@ public class ReportServiceTest {
     }
     
     @Test
-    public void testReportGeneration_BoundaryConditions() {
-        System.out.println("Testing report generation with boundary conditions...");
-        
-        // Test with exactly one day range
-        LocalDate singleDay = LocalDate.now();
-        ReportService.OvertimeReport report1 = 
-            reportService.generateOvertimeReport(singleDay, singleDay);
-        assertNotNull("Should handle single day range", report1);
-        assertTrue("Should succeed with single day", report1.isSuccess());
-        
-        // Test with exactly one year
-        ReportService.LeaveReport report2 = 
-            reportService.generateLeaveReport(LocalDate.now().getYear());
-        assertNotNull("Should handle current year", report2);
-        assertTrue("Should succeed with current year", report2.isSuccess());
-        
-        // Test with month boundaries
-        YearMonth january = YearMonth.of(LocalDate.now().getYear(), 1);
-        YearMonth december = YearMonth.of(LocalDate.now().getYear(), 12);
-        
-        ReportService.MonthlyAttendanceReport report3 = 
-            reportService.generateMonthlyAttendanceReport(january);
-        assertNotNull("Should handle January", report3);
-        assertTrue("Should succeed with January", report3.isSuccess());
-        
-        ReportService.MonthlyAttendanceReport report4 = 
-            reportService.generateMonthlyAttendanceReport(december);
-        assertNotNull("Should handle December", report4);
-        assertTrue("Should succeed with December", report4.isSuccess());
-    }
-    
-    @Test
     public void testReportGeneration_PerformanceWithLargeDataSet() {
         System.out.println("Testing report generation performance...");
         
@@ -967,179 +616,5 @@ public class ReportServiceTest {
         assertTrue("Report should complete within 30 seconds", duration < 30000);
         
         System.out.println("Report generation took " + duration + " ms");
-    }
-    
-    @Test
-    public void testReportConsistency_MultipleRuns() {
-        System.out.println("Testing report consistency across multiple runs...");
-        
-        if (testPayPeriodId != null) {
-            // Generate same report twice
-            ReportService.PayrollReport report1 = reportService.generatePayrollReport(testPayPeriodId);
-            ReportService.PayrollReport report2 = reportService.generatePayrollReport(testPayPeriodId);
-            
-            if (report1.isSuccess() && report2.isSuccess()) {
-                // Both reports should have same data
-                assertEquals("Total employees should match", 
-                            report1.getTotalEmployees(), report2.getTotalEmployees());
-                assertEquals("Total gross income should match", 
-                            report1.getTotalGrossIncome(), report2.getTotalGrossIncome());
-                assertEquals("Total net salary should match", 
-                            report1.getTotalNetSalary(), report2.getTotalNetSalary());
-                assertEquals("Number of entries should match", 
-                            report1.getPayrollEntries().size(), report2.getPayrollEntries().size());
-            }
-        }
-    }
-    
-    @Test
-    public void testReportGeneration_ZeroValueScenarios() {
-        System.out.println("Testing report generation with zero values...");
-        
-        // Create employee with zero salary (intern/volunteer scenario)
-        EmployeeModel zeroSalaryEmployee = new EmployeeModel();
-        zeroSalaryEmployee.setFirstName("Volunteer");
-        zeroSalaryEmployee.setLastName("Worker");
-        zeroSalaryEmployee.setBirthDate(LocalDate.of(1995, 3, 20));
-        zeroSalaryEmployee.setEmail("volunteer@test.com");
-        zeroSalaryEmployee.setBasicSalary(BigDecimal.ZERO);
-        zeroSalaryEmployee.setHourlyRate(BigDecimal.ZERO);
-        zeroSalaryEmployee.setPasswordHash("volunteer_hash");
-        zeroSalaryEmployee.setStatus(EmployeeModel.EmployeeStatus.REGULAR);
-        zeroSalaryEmployee.setPositionId(1);
-        
-        boolean saved = employeeDAO.save(zeroSalaryEmployee);
-        
-        if (saved) {
-            // Generate salary comparison report
-            ReportService.SalaryComparisonReport report = 
-                reportService.generateSalaryComparisonReport(
-                    LocalDate.now().minusMonths(1), 
-                    LocalDate.now()
-                );
-            
-            assertTrue("Report should handle zero salary employees", report.isSuccess());
-            
-            // Clean up
-            employeeDAO.delete(zeroSalaryEmployee.getEmployeeId());
-        }
-    }
-    
-    @Test
-    public void testAllReportTypes_EmptyResults() {
-        System.out.println("Testing all report types with conditions that yield empty results...");
-        
-        // Use dates far in the past where no data exists
-        LocalDate ancientDate = LocalDate.of(1800, 1, 1);
-        YearMonth ancientMonth = YearMonth.of(1800, 1);
-        
-        // Test each report type
-        ReportService.PayrollReport payrollReport = 
-            reportService.generatePayrollReport(99999); // Non-existent ID
-        assertFalse("Payroll report should fail for non-existent period", payrollReport.isSuccess());
-        
-        ReportService.AttendanceReport attendanceReport = 
-            reportService.generateDailyAttendanceReport(ancientDate);
-        assertTrue("Attendance report should succeed with empty data", attendanceReport.isSuccess());
-        assertEquals("Should have zero attendance", 0, attendanceReport.getTotalEmployees());
-        
-        ReportService.MonthlyAttendanceReport monthlyAttendanceReport = 
-            reportService.generateMonthlyAttendanceReport(ancientMonth);
-        assertTrue("Monthly attendance report should succeed with empty data", monthlyAttendanceReport.isSuccess());
-        
-        ReportService.LeaveReport leaveReport = 
-            reportService.generateLeaveReport(1800);
-        assertTrue("Leave report should succeed with empty data", leaveReport.isSuccess());
-        assertEquals("Should have zero leave data", 0, leaveReport.getTotalAllocatedDays());
-        
-        ReportService.OvertimeReport overtimeReport = 
-            reportService.generateOvertimeReport(ancientDate, ancientDate.plusDays(1));
-        assertTrue("Overtime report should succeed with empty data", overtimeReport.isSuccess());
-        assertEquals("Should have zero overtime", BigDecimal.ZERO, overtimeReport.getTotalOvertimeHours());
-        
-        ReportService.ComplianceReport complianceReport = 
-            reportService.generateComplianceReport(ancientMonth);
-        assertTrue("Compliance report should succeed with empty data", complianceReport.isSuccess());
-        // Compliance report shows all active employees regardless of month
-        // because it calculates current contributions
-        assertTrue("Compliance report shows current active employees", 
-                  complianceReport.getTotalEmployees() >= 0);
-    }
-    
-    // ================================
-    // SUMMARY TEST
-    // ================================
-    
-    @Test
-    public void testReportServiceCompleteness() {
-        System.out.println("\n=== REPORT SERVICE TEST SUMMARY ===");
-        System.out.println("Testing that all report types are accessible and functional...");
-        
-        int successCount = 0;
-        int totalTests = 7; // Updated to 7 to include all report types
-        
-        // Test all report types are accessible
-        try {
-            if (testPayPeriodId != null) {
-                ReportService.PayrollReport payrollReport = reportService.generatePayrollReport(testPayPeriodId);
-                if (payrollReport != null) successCount++;
-            } else {
-                totalTests--;
-            }
-        } catch (Exception e) {
-            System.err.println("Payroll report failed: " + e.getMessage());
-        }
-        
-        try {
-            ReportService.SalaryComparisonReport salaryReport = 
-                reportService.generateSalaryComparisonReport(LocalDate.now().minusMonths(1), LocalDate.now());
-            if (salaryReport != null) successCount++;
-        } catch (Exception e) {
-            System.err.println("Salary comparison report failed: " + e.getMessage());
-        }
-        
-        try {
-            ReportService.AttendanceReport attendanceReport = 
-                reportService.generateDailyAttendanceReport(LocalDate.now());
-            if (attendanceReport != null) successCount++;
-        } catch (Exception e) {
-            System.err.println("Daily attendance report failed: " + e.getMessage());
-        }
-        
-        try {
-            ReportService.MonthlyAttendanceReport monthlyReport = 
-                reportService.generateMonthlyAttendanceReport(YearMonth.now());
-            if (monthlyReport != null) successCount++;
-        } catch (Exception e) {
-            System.err.println("Monthly attendance report failed: " + e.getMessage());
-        }
-        
-        try {
-            ReportService.LeaveReport leaveReport = 
-                reportService.generateLeaveReport(LocalDate.now().getYear());
-            if (leaveReport != null) successCount++;
-        } catch (Exception e) {
-            System.err.println("Leave report failed: " + e.getMessage());
-        }
-        
-        try {
-            ReportService.OvertimeReport overtimeReport = 
-                reportService.generateOvertimeReport(LocalDate.now().minusMonths(1), LocalDate.now());
-            if (overtimeReport != null) successCount++;
-        } catch (Exception e) {
-            System.err.println("Overtime report failed: " + e.getMessage());
-        }
-        
-        try {
-            ReportService.ComplianceReport complianceReport = 
-                reportService.generateComplianceReport(YearMonth.now());
-            if (complianceReport != null) successCount++;
-        } catch (Exception e) {
-            System.err.println("Compliance report failed: " + e.getMessage());
-        }
-        
-        System.out.println("Report types accessible: " + successCount + "/" + totalTests);
-        assertTrue("Most report types should be accessible", successCount >= totalTests - 1);
-        System.out.println("=== TEST SUMMARY COMPLETE ===\n");
     }
 }

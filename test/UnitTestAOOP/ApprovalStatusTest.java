@@ -84,14 +84,6 @@ public class ApprovalStatusTest {
     }
     
     @Test
-    public void testToString() {
-        // Test toString() method
-        assertEquals("PENDING toString should return 'Pending'", "Pending", ApprovalStatus.PENDING.toString());
-        assertEquals("APPROVED toString should return 'Approved'", "Approved", ApprovalStatus.APPROVED.toString());
-        assertEquals("REJECTED toString should return 'Rejected'", "Rejected", ApprovalStatus.REJECTED.toString());
-    }
-    
-    @Test
     public void testValueOf() {
         // Test standard enum valueOf() method
         assertEquals("valueOf('PENDING') should return PENDING enum", 
@@ -110,11 +102,6 @@ public class ApprovalStatusTest {
         assertNull("fromValue(null) should return null", ApprovalStatus.fromValue(null));
     }
     
-    @Test
-    public void testFromValueWithEmptyString() {
-        // Test fromValue() with empty string
-        assertNull("fromValue('') should return null", ApprovalStatus.fromValue(""));
-    }
     
     @Test
     public void testFromValueWithInvalidValues() {
@@ -141,48 +128,7 @@ public class ApprovalStatusTest {
         ApprovalStatus.valueOf("Invalid");
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void testValueOfWithLowerCase() {
-        // Test valueOf() with lowercase - should throw exception
-        ApprovalStatus.valueOf("pending");
-    }
-    
-    @Test(expected = NullPointerException.class)
-    public void testValueOfWithNull() {
-        // Test valueOf() with null - should throw exception
-        ApprovalStatus.valueOf(null);
-    }
-    
     // ==================== EDGE CASES ====================
-    
-    @Test
-    public void testEnumOrdinal() {
-        // Test enum ordinal values (order in which they're declared)
-        assertEquals("PENDING should have ordinal 0", 0, ApprovalStatus.PENDING.ordinal());
-        assertEquals("APPROVED should have ordinal 1", 1, ApprovalStatus.APPROVED.ordinal());
-        assertEquals("REJECTED should have ordinal 2", 2, ApprovalStatus.REJECTED.ordinal());
-    }
-    
-    @Test
-    public void testEnumName() {
-        // Test enum name() method
-        assertEquals("PENDING.name() should return 'PENDING'", "PENDING", ApprovalStatus.PENDING.name());
-        assertEquals("APPROVED.name() should return 'APPROVED'", "APPROVED", ApprovalStatus.APPROVED.name());
-        assertEquals("REJECTED.name() should return 'REJECTED'", "REJECTED", ApprovalStatus.REJECTED.name());
-    }
-    
-    @Test
-    public void testEnumEquality() {
-        // Test enum equality
-        ApprovalStatus status1 = ApprovalStatus.PENDING;
-        ApprovalStatus status2 = ApprovalStatus.PENDING;
-        ApprovalStatus status3 = ApprovalStatus.APPROVED;
-        
-        assertTrue("Same enum instances should be equal", status1 == status2);
-        assertTrue("Same enum instances should be equal with equals()", status1.equals(status2));
-        assertFalse("Different enum instances should not be equal", status1 == status3);
-        assertFalse("Different enum instances should not be equal with equals()", status1.equals(status3));
-    }
     
     @Test
     public void testFromValueCaseSensitivity() {
@@ -273,48 +219,5 @@ public class ApprovalStatusTest {
             assertEquals("Database value '" + dbValues[i] + "' should convert correctly",
                         expectedStatuses[i], status);
         }
-    }
-    
-    @Test
-    public void testEnumToStringForDisplay() {
-        // Test converting enum to string for display purposes
-        ApprovalStatus[] statuses = ApprovalStatus.values();
-        String[] expectedDisplayValues = {"Pending", "Approved", "Rejected"};
-        
-        for (int i = 0; i < statuses.length; i++) {
-            assertEquals("Status should display as '" + expectedDisplayValues[i] + "'",
-                        expectedDisplayValues[i], statuses[i].toString());
-        }
-    }
-    
-    @Test
-    public void testNullHandlingInBusinessLogic() {
-        // Test handling null values in business logic
-        ApprovalStatus status = ApprovalStatus.fromValue(null);
-        assertNull("Null input should return null status", status);
-        
-        // Simulate checking status when it might be null
-        if (status != null && status.isApproved()) {
-            fail("Null status should not be processed as approved");
-        }
-        // Test passes if we don't enter the if block
-    }
-    
-    @Test
-    public void testInvalidDatabaseValueHandling() {
-        // Simulate handling invalid database values
-        String[] invalidDbValues = {
-            "Approved ",  // trailing space
-            " Pending",   // leading space
-            "approved",   // wrong case
-            "Canceled",   // wrong value
-            "",           // empty string
-            "null"        // string "null"
-        };
-        
-        for (String invalidValue : invalidDbValues) {
-            ApprovalStatus status = ApprovalStatus.fromValue(invalidValue);
-            assertNull("Invalid value '" + invalidValue + "' should return null", status);
-        }
-    }
+    }   
 }

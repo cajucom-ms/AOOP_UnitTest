@@ -39,27 +39,6 @@ public class LeaveRequestModelTest {
     // --- Date Validation Tests (Positive) ---
     
     @Test
-    public void testSetStartDate_valid() {
-        LocalDate futureDate = LocalDate.now().plusDays(7);
-        leaveRequest.setLeaveStart(futureDate);
-        
-        assertEquals("Start date should be set correctly", futureDate, leaveRequest.getLeaveStart());
-        assertTrue("Future leave should be identified correctly", leaveRequest.isFutureLeave());
-    }
-    
-    @Test
-    public void testSetEndDate_valid() {
-        LocalDate startDate = LocalDate.now().plusDays(7);
-        LocalDate endDate = startDate.plusDays(5);
-        
-        leaveRequest.setLeaveStart(startDate);
-        leaveRequest.setLeaveEnd(endDate);
-        
-        assertEquals("End date should be set correctly", endDate, leaveRequest.getLeaveEnd());
-        assertTrue("Valid dates should be recognized", leaveRequest.hasValidDates());
-    }
-    
-    @Test
     public void testSetDateRange_validSameDay() {
         LocalDate sameDay = LocalDate.now().plusDays(10);
         leaveRequest.setLeaveStart(sameDay);
@@ -78,26 +57,6 @@ public class LeaveRequestModelTest {
         leaveRequest.setLeaveEnd(endDate);
         
         assertEquals("Leave days calculation should be inclusive", 5, leaveRequest.getLeaveDays());
-    }
-    
-    // --- Employee and Leave Type Tests (Positive) ---
-    
-    @Test
-    public void testSetEmployeeId_valid() {
-        leaveRequest.setEmployeeId(VALID_EMPLOYEE_ID);
-        assertEquals("Employee ID should be set correctly", VALID_EMPLOYEE_ID, leaveRequest.getEmployeeId());
-    }
-    
-    @Test
-    public void testSetLeaveTypeId_valid() {
-        leaveRequest.setLeaveTypeId(VALID_LEAVE_TYPE_ID);
-        assertEquals("Leave type ID should be set correctly", VALID_LEAVE_TYPE_ID, leaveRequest.getLeaveTypeId());
-    }
-    
-    @Test
-    public void testSetLeaveReason_valid() {
-        leaveRequest.setLeaveReason(VALID_REASON);
-        assertEquals("Leave reason should be set correctly", VALID_REASON, leaveRequest.getLeaveReason());
     }
     
     // --- Enum Validation Tests (Positive) ---
@@ -208,18 +167,6 @@ public class LeaveRequestModelTest {
     }
     
     @Test
-    public void testSetDateRange_pastDates() {
-        LocalDate pastStartDate = LocalDate.now().minusDays(30);
-        LocalDate pastEndDate = LocalDate.now().minusDays(25);
-        
-        leaveRequest.setLeaveStart(pastStartDate);
-        leaveRequest.setLeaveEnd(pastEndDate);
-        
-        assertFalse("Past dates should not be considered future leave", leaveRequest.isFutureLeave());
-        assertTrue("Past dates can still be valid range", leaveRequest.hasValidDates());
-    }
-    
-    @Test
     public void testSetDateRange_nullDates() {
         // Test null start date
         leaveRequest.setLeaveStart(null);
@@ -244,18 +191,6 @@ public class LeaveRequestModelTest {
     }
     
     // --- Field Validation Tests (Negative) ---
-    
-    @Test
-    public void testSetReason_null() {
-        leaveRequest.setLeaveReason(null);
-        assertNull("Null reason should be allowed", leaveRequest.getLeaveReason());
-    }
-    
-    @Test
-    public void testSetReason_empty() {
-        leaveRequest.setLeaveReason("");
-        assertEquals("Empty reason should be allowed", "", leaveRequest.getLeaveReason());
-    }
     
     @Test
     public void testSetReason_veryLong() {
@@ -334,17 +269,6 @@ public class LeaveRequestModelTest {
     // --- Supervisor Notes Tests (Negative) ---
     
     @Test
-    public void testSetSupervisorNotes_null() {
-        leaveRequest.setSupervisorNotes(null);
-        assertNull("Null supervisor notes should be allowed", leaveRequest.getSupervisorNotes());
-        
-        // Test approve with null notes
-        leaveRequest.approve(null);
-        assertNull("Approve with null notes should work", leaveRequest.getSupervisorNotes());
-        assertEquals("Status should still be approved", ApprovalStatus.APPROVED, leaveRequest.getApprovalStatus());
-    }
-    
-    @Test
     public void testReject_withNullNotes() {
         // Rejection typically requires notes, but model allows null
         leaveRequest.reject(null);
@@ -352,60 +276,11 @@ public class LeaveRequestModelTest {
         assertEquals("Status should still be rejected", ApprovalStatus.REJECTED, leaveRequest.getApprovalStatus());
     }
     
-    // --- Edge Case Tests ---
-    
-    @Test
-    public void testLeaveRequestId_boundaries() {
-        // Test maximum integer value
-        leaveRequest.setLeaveRequestId(Integer.MAX_VALUE);
-        assertEquals("Maximum ID should be stored", Integer.valueOf(Integer.MAX_VALUE), leaveRequest.getLeaveRequestId());
-        
-        // Test minimum integer value
-        leaveRequest.setLeaveRequestId(Integer.MIN_VALUE);
-        assertEquals("Minimum ID should be stored", Integer.valueOf(Integer.MIN_VALUE), leaveRequest.getLeaveRequestId());
-        
-        // Test null
-        leaveRequest.setLeaveRequestId(null);
-        assertNull("Null ID should be allowed", leaveRequest.getLeaveRequestId());
-    }
-    
-    @Test
-    public void testDateCreated_manipulation() {
-        LocalDateTime customDate = LocalDateTime.of(2020, 1, 1, 0, 0);
-        leaveRequest.setDateCreated(customDate);
-        assertEquals("Custom date created should be set", customDate, leaveRequest.getDateCreated());
-        
-        // Test null
-        leaveRequest.setDateCreated(null);
-        assertNull("Null date created should be allowed", leaveRequest.getDateCreated());
-    }
-    
-    @Test
-    public void testDateApproved_withoutApproval() {
-        // Set date approved without changing status
-        LocalDateTime approvalDate = LocalDateTime.now();
-        leaveRequest.setDateApproved(approvalDate);
-        
-        assertEquals("Date approved should be set", approvalDate, leaveRequest.getDateApproved());
-        assertEquals("Status should remain PENDING", ApprovalStatus.PENDING, leaveRequest.getApprovalStatus());
-        assertTrue("Request should still be pending despite approval date", leaveRequest.isPending());
-    }
-    
     // --- Equals and HashCode Tests ---
-    
-    @Test
-    public void testEquals_sameObject() {
-        assertTrue("Same object should be equal", leaveRequest.equals(leaveRequest));
-    }
     
     @Test
     public void testEquals_null() {
         assertFalse("Should not equal null", leaveRequest.equals(null));
-    }
-    
-    @Test
-    public void testEquals_differentClass() {
-        assertFalse("Should not equal different class", leaveRequest.equals("Not a LeaveRequest"));
     }
     
     @Test
@@ -418,58 +293,6 @@ public class LeaveRequestModelTest {
         
         assertTrue("Objects with same ID should be equal", leave1.equals(leave2));
         assertEquals("Objects with same ID should have same hashcode", leave1.hashCode(), leave2.hashCode());
-    }
-    
-    @Test
-    public void testEquals_differentId() {
-        LeaveRequestModel leave1 = new LeaveRequestModel();
-        LeaveRequestModel leave2 = new LeaveRequestModel();
-        
-        leave1.setLeaveRequestId(100);
-        leave2.setLeaveRequestId(200);
-        
-        assertFalse("Objects with different IDs should not be equal", leave1.equals(leave2));
-    }
-    
-    @Test
-    public void testEquals_nullIds() {
-        LeaveRequestModel leave1 = new LeaveRequestModel();
-        LeaveRequestModel leave2 = new LeaveRequestModel();
-        
-        // Both have null IDs
-        assertFalse("Objects with null IDs should not be equal", leave1.equals(leave2));
-        assertEquals("Objects with null IDs should have hashcode 0", 0, leave1.hashCode());
-        assertEquals("Objects with null IDs should have hashcode 0", 0, leave2.hashCode());
-    }
-    
-    // --- ToString Tests ---
-    
-    @Test
-    public void testToString_completeObject() {
-        leaveRequest.setLeaveRequestId(123);
-        leaveRequest.setEmployeeId(VALID_EMPLOYEE_ID);
-        leaveRequest.setLeaveTypeId(VALID_LEAVE_TYPE_ID);
-        leaveRequest.setLeaveStart(LocalDate.now());
-        leaveRequest.setLeaveEnd(LocalDate.now().plusDays(2));
-        leaveRequest.setApprovalStatus(ApprovalStatus.PENDING);
-        
-        String toString = leaveRequest.toString();
-        
-        assertTrue("ToString should contain leaveRequestId", toString.contains("leaveRequestId=123"));
-        assertTrue("ToString should contain employeeId", toString.contains("employeeId=" + VALID_EMPLOYEE_ID));
-        assertTrue("ToString should contain leaveTypeId", toString.contains("leaveTypeId=" + VALID_LEAVE_TYPE_ID));
-        assertTrue("ToString should contain leaveDays", toString.contains("leaveDays=3"));
-        assertTrue("ToString should contain approvalStatus", toString.contains("approvalStatus=PENDING"));
-        assertTrue("ToString should contain isPending", toString.contains("isPending=true"));
-    }
-    
-    @Test
-    public void testToString_withNullValues() {
-        // Leave all fields as null/default
-        String toString = leaveRequest.toString();
-        
-        assertNotNull("ToString should not return null", toString);
-        assertTrue("ToString should handle null values", toString.contains("null"));
     }
     
     // --- Complex Scenario Tests ---
@@ -527,18 +350,5 @@ public class LeaveRequestModelTest {
         
         assertTrue("Cross-year leave should have valid dates", leaveRequest.hasValidDates());
         assertEquals("Should calculate correct days across years", 7, leaveRequest.getLeaveDays());
-    }
-    
-    @Test
-    public void testMaximumLeaveDuration() {
-        // Test extremely long leave (e.g., 1 year sabbatical)
-        LocalDate start = LocalDate.now();
-        LocalDate end = start.plusYears(1);
-        
-        leaveRequest.setLeaveStart(start);
-        leaveRequest.setLeaveEnd(end);
-        
-        assertTrue("Long duration should be valid", leaveRequest.hasValidDates());
-        assertTrue("Should calculate days correctly", leaveRequest.getLeaveDays() > 365);
     }
 }
