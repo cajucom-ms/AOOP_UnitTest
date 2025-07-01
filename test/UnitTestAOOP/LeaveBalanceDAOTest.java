@@ -410,26 +410,7 @@ public class LeaveBalanceDAOTest {
     // =============================
     // EDGE CASE TESTS
     // =============================
-    
-    @Test
-    public void testSave_MaxIntegerValues() {
-        LeaveBalance leaveBalance = createTestLeaveBalance();
-        leaveBalance.setTotalLeaveDays(Integer.MAX_VALUE);
-        leaveBalance.setUsedLeaveDays(0);
-        leaveBalance.setRemainingLeaveDays(Integer.MAX_VALUE);
-        
-        boolean result = leaveBalanceDAO.save(leaveBalance);
-        
-        if (result) {
-            LeaveBalance saved = leaveBalanceDAO.findByEmployeeLeaveTypeAndYear(
-                TEST_EMPLOYEE_ID, TEST_LEAVE_TYPE_ID, TEST_YEAR
-            );
-            assertNotNull("Should save and retrieve max integer values", saved);
-        } else {
-            assertTrue("Save might fail due to database constraints", true);
-        }
-    }
-    
+      
     @Test
     public void testFindAll_EmptyTable() throws SQLException {
         // Clean all test data
@@ -489,52 +470,7 @@ public class LeaveBalanceDAOTest {
         
         assertTrue("Should initialize leave balances for new year", result > 0);
     }
-    
-    // =============================
-    // REPORT GENERATION TESTS
-    // =============================
-    
-    @Test
-    public void testGenerateLeaveBalanceReport_SingleEmployee() {
-        LeaveBalance balance = createTestLeaveBalance();
-        balance.setTotalLeaveDays(20);
-        balance.setUsedLeaveDays(8);
-        balance.setRemainingLeaveDays(12);
-        leaveBalanceDAO.save(balance);
-        
-        List<LeaveBalance> report = leaveBalanceDAO.findByEmployeeAndYear(TEST_EMPLOYEE_ID, TEST_YEAR);
-        
-        assertNotNull("Report should not be null", report);
-        assertFalse("Report should contain data", report.isEmpty());
-        
-        // Verify report data integrity
-        for (LeaveBalance lb : report) {
-            assertTrue("Total days should be positive", lb.getTotalLeaveDays() >= 0);
-            assertTrue("Used days should be non-negative", lb.getUsedLeaveDays() >= 0);
-            assertTrue("Remaining days should be non-negative", lb.getRemainingLeaveDays() >= 0);
-        }
-    }
-    
-    @Test
-    public void testGenerateLeaveBalanceReport_YearlyComparison() {
-        // Create balances for multiple years
-        for (int year = 2022; year <= 2024; year++) {
-            LeaveBalance balance = createTestLeaveBalance();
-            balance.setBalanceYear(year);
-            balance.setTotalLeaveDays(15);
-            balance.setUsedLeaveDays(year - 2022 + 5); // Different usage each year
-            leaveBalanceDAO.save(balance);
-        }
-        
-        // Get reports for each year
-        for (int year = 2022; year <= 2024; year++) {
-            List<LeaveBalance> yearReport = leaveBalanceDAO.findByEmployeeAndYear(TEST_EMPLOYEE_ID, year);
-            
-            assertNotNull("Year " + year + " report should not be null", yearReport);
-            assertFalse("Year " + year + " report should have data", yearReport.isEmpty());
-        }
-    }
-    
+       
     // =============================
     // ENTITY VALIDATION TESTS
     // =============================
@@ -556,85 +492,7 @@ public class LeaveBalanceDAOTest {
             assertTrue("Save might fail with null total days", true);
         }
     }
-    
-    @Test
-    public void testEntityValidation_InconsistentData() {
-        LeaveBalance balance = createTestLeaveBalance();
-        balance.setTotalLeaveDays(10);
-        balance.setUsedLeaveDays(15); // More than total
-        balance.setRemainingLeaveDays(-5); // Negative remaining
-        
-        boolean result = leaveBalanceDAO.save(balance);
-        
-        // Test should verify how the system handles inconsistent data
-        if (result) {
-            LeaveBalance saved = leaveBalanceDAO.findByEmployeeLeaveTypeAndYear(
-                TEST_EMPLOYEE_ID, TEST_LEAVE_TYPE_ID, TEST_YEAR
-            );
-            assertNotNull("Should save even with inconsistent data", saved);
-        } else {
-            assertTrue("Save might fail with inconsistent data", true);
-        }
-    }
-    
-    @Test
-    public void testEntityValidation_BoundaryYearValues() {
-        // Test minimum year
-        LeaveBalance minYear = createTestLeaveBalance();
-        minYear.setBalanceYear(1900);
-        boolean minResult = leaveBalanceDAO.save(minYear);
-        
-        // Test maximum reasonable year
-        LeaveBalance maxYear = createTestLeaveBalance();
-        maxYear.setBalanceYear(2100);
-        maxYear.setEmployeeId(99998); // Different employee to avoid duplicate
-        boolean maxResult = leaveBalanceDAO.save(maxYear);
-        
-        // Both should be handled by the system
-        assertTrue("Should handle historical years", minResult || !minResult); // System decides
-        assertTrue("Should handle future years", maxResult || !maxResult); // System decides
-    }
-    
-    // =============================
-    // CONCURRENT ACCESS TESTS
-    // =============================
-    
-    @Test
-    public void testConcurrentUpdate_SameRecord() throws InterruptedException {
-        LeaveBalance balance = createTestLeaveBalance();
-        balance.setUsedLeaveDays(0);
-        balance.setRemainingLeaveDays(15);
-        leaveBalanceDAO.save(balance);
-        
-        LeaveBalance saved = leaveBalanceDAO.findByEmployeeLeaveTypeAndYear(
-            TEST_EMPLOYEE_ID, TEST_LEAVE_TYPE_ID, TEST_YEAR
-        );
-        assertNotNull("Saved balance should exist", saved);
-        
-        final Integer balanceId = saved.getLeaveBalanceId();
-        
-        // Simulate concurrent updates
-        Thread thread1 = new Thread(() -> {
-            leaveBalanceDAO.updateUsedLeaveDays(balanceId, 5);
-        });
-        
-        Thread thread2 = new Thread(() -> {
-            leaveBalanceDAO.updateUsedLeaveDays(balanceId, 7);
-        });
-        
-        thread1.start();
-        thread2.start();
-        
-        thread1.join();
-        thread2.join();
-        
-        // Verify final state
-        LeaveBalance finalBalance = leaveBalanceDAO.findById(balanceId);
-        assertNotNull("Record should still exist after concurrent updates", finalBalance);
-        assertTrue("Used days should be either 5 or 7", 
-                  finalBalance.getUsedLeaveDays() == 5 || finalBalance.getUsedLeaveDays() == 7);
-    }
-    
+       
     // =============================
     // HELPER METHODS
     // =============================

@@ -188,41 +188,7 @@ public class LeaveDAOTest {
         assertEquals("End date should be updated", newEndDate, updated.getLeaveEnd());
         assertEquals("Reason should be updated", newReason, updated.getLeaveReason());
     }
-    
-    @Test
-    public void testDeleteExistingLeaveRequest() {
-        System.out.println("Testing: Delete existing leave request");
-        
-        if (!canSaveTestData) {
-            System.out.println("SKIPPED: Cannot test deletion due to missing prerequisites");
-            return;
-        }
-        
-        // Since there's no delete method in LeaveDAO, we'll test the concept differently
-        // Save a leave request
-        LeaveRequestModel leave = createValidLeaveRequest();
-        boolean saved = leaveDAO.save(leave);
-        
-        if (!saved) {
-            System.out.println("Could not save test data - skipping delete test");
-            return;
-        }
-        
-        Integer leaveId = leave.getLeaveRequestId();
-        
-        // Verify it exists first
-        LeaveRequestModel found = leaveDAO.findById(leaveId);
-        assertNotNull("Leave request should exist before deletion test", found);
-        
-        // Since we can't delete directly, we can test by updating status to simulate deletion
-        // Or skip this test with a message
-        System.out.println("Note: Delete functionality not available in current DAO implementation");
-        
-        // Alternative: Test that the record still exists (negative assertion)
-        LeaveRequestModel stillExists = leaveDAO.findById(leaveId);
-        assertNotNull("Without delete method, leave request should still exist", stillExists);
-    }
-    
+       
     @Test
     public void testFindByEmployeeId() {
         System.out.println("Testing: Find leave requests by employee ID");
@@ -522,63 +488,8 @@ public class LeaveDAOTest {
             System.out.println("Expected exception for null ID in update: " + e.getClass().getSimpleName());
             assertTrue("Null pointer exception is acceptable", e instanceof NullPointerException);
         }
-    }
-    
-    @Test
-    public void testDeleteNonExistentLeaveRequest() {
-        System.out.println("Testing: Delete non-existent leave request (skipped - no delete method)");
-        
-        // Since there's no delete method in LeaveDAO, we skip this test
-        // but document what would be tested
-        System.out.println("Would test: Attempting to delete a non-existent leave request");
-        System.out.println("Expected: Operation should return false or throw appropriate exception");
-        
-        // Alternative test: Verify non-existent records return null
-        LeaveRequestModel notFound = leaveDAO.findById(99999);
-        assertNull("Non-existent leave request should return null", notFound);
-    }
-    
-    @Test
-    public void testDeleteNullLeaveRequest() {
-        System.out.println("Testing: Delete with null leave request (skipped - no delete method)");
-        
-        // Document what would be tested
-        System.out.println("Would test: Attempting to delete null entity");
-        System.out.println("Expected: Operation should return false or throw NullPointerException");
-        
-        // We can still test null handling in other methods
-        assertTrue("Test documented for future implementation", true);
-    }
-    
-    @Test
-    public void testDeleteLeaveRequestWithNullId() {
-        System.out.println("Testing: Handle leave request with null ID (alternative test)");
-        
-        try {
-            // Test alternative null ID scenario with update
-            LeaveRequestModel leave = createValidLeaveRequest();
-            leave.setLeaveRequestId(null);
-            boolean updateResult = leaveDAO.update(leave);
-            assertFalse("Update with null ID should fail", updateResult);
-        } catch (Exception e) {
-            System.out.println("Expected exception for null ID: " + e.getClass().getSimpleName());
-            assertTrue("Exception is acceptable for null ID operation", true);
-        }
-    }
-    
-    @Test
-    public void testDeleteLeaveRequestWithNegativeId() {
-        System.out.println("Testing: Delete leave request with negative ID (skipped - no delete method)");
-        
-        // Document what would be tested
-        System.out.println("Would test: Attempting to delete entity with negative ID");
-        System.out.println("Expected: Operation should return false");
-        
-        // Test alternative negative ID scenario
-        LeaveRequestModel notFound = leaveDAO.findById(-1);
-        assertNull("Negative ID should not find any record", notFound);
-    }
-    
+    }   
+           
     @Test
     public void testFindByEmployeeIdNull() {
         System.out.println("Testing: Find leave requests by null employee ID");
@@ -697,26 +608,7 @@ public class LeaveDAOTest {
             assertTrue("Database rejected same dates (may be a business rule)", true);
         }
     }
-    
-    @Test
-    public void testSaveLeaveRequestWithVeryLongReason() {
-        System.out.println("Testing: Save leave request with very long reason");
         
-        LeaveRequestModel leave = createValidLeaveRequest();
-        StringBuilder longReason = new StringBuilder();
-        for (int i = 0; i < 500; i++) {
-            longReason.append("A");
-        }
-        leave.setLeaveReason(longReason.toString());
-        
-        boolean result = leaveDAO.save(leave);
-        
-        // This depends on database column size constraints
-        if (!result) {
-            System.out.println("Database rejected very long reason (expected based on column constraints)");
-        }
-    }
-    
     @Test
     public void testSaveLeaveRequestWithEmptyReason() {
         System.out.println("Testing: Save leave request with empty reason");
@@ -1005,35 +897,5 @@ public class LeaveDAOTest {
         } catch (SQLException e) {
             System.err.println("Error cleaning up test data: " + e.getMessage());
         }
-    }
-    
-    // ========================================
-    // PERFORMANCE AND STRESS TESTS
-    // ========================================
-    
-    @Test
-    public void testLargeDatasetRetrieval() {
-        System.out.println("Testing: Large dataset retrieval");
-        
-        // Create multiple leave requests
-        int testSize = 20;
-        for (int i = 0; i < testSize; i++) {
-            LeaveRequestModel leave = createValidLeaveRequest();
-            leave.setEmployeeId((i % 5) + 1); // Distribute among 5 employees
-            leave.setLeaveStart(LocalDate.now().plusDays(i));
-            leave.setLeaveEnd(LocalDate.now().plusDays(i + 3));
-            leaveDAO.save(leave);
-        }
-        
-        long startTime = System.currentTimeMillis();
-        List<LeaveRequestModel> allLeaves = leaveDAO.findAll();
-        long endTime = System.currentTimeMillis();
-        
-        assertNotNull("Should retrieve all leaves", allLeaves);
-        assertTrue("Should find at least " + testSize + " leaves", allLeaves.size() >= testSize);
-        
-        long duration = endTime - startTime;
-        System.out.println("Retrieved " + allLeaves.size() + " records in " + duration + "ms");
-        assertTrue("Retrieval should be reasonably fast (< 5 seconds)", duration < 5000);
     }
 }

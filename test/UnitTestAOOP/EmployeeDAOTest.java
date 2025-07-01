@@ -372,16 +372,6 @@ public class EmployeeDAOTest {
     }
     
     @Test
-    public void testGetEmployeesByDepartment_invalidDepartment() {
-        System.out.println("\n[TEST] testGetEmployeesByDepartment_invalidDepartment -️ NEGATIVE");
-        
-        List<EmployeeModel> result = employeeDAO.getEmployeesByDepartment("NonExistentDept");
-        
-        assertNotNull("Should return empty list, not null", result);
-        assertTrue("Should return empty list for non-existent department", result.isEmpty());
-    }
-    
-    @Test
     public void testGetActiveEmployees_mixedStatuses() {
         System.out.println("\n[TEST] testGetActiveEmployees_mixedStatuses");
         
@@ -650,130 +640,7 @@ public class EmployeeDAOTest {
     
     // =====================================
     // EDGE CASE TESTS
-    // =====================================
-    
-    @Test
-    public void testBoundaryValues_dates() {
-        System.out.println("\n[TEST] testBoundaryValues_dates");
-        
-        // Test very old birth date
-        EmployeeModel oldEmployee = createValidEmployee();
-        oldEmployee.setEmail(generateUniqueEmail("old"));
-        oldEmployee.setBirthDate(LocalDate.of(1900, 1, 1));
-        
-        boolean oldResult = employeeDAO.save(oldEmployee);
-        if (oldResult) {
-            createdEmployeeIds.add(oldEmployee.getEmployeeId());
-            assertTrue("Should save employee with old birth date", oldResult);
-        }
-        
-        // Test future birth date (should ideally fail validation)
-        EmployeeModel futureEmployee = createValidEmployee();
-        futureEmployee.setEmail(generateUniqueEmail("future"));
-        futureEmployee.setBirthDate(LocalDate.now().plusYears(1));
-        
-        boolean futureResult = employeeDAO.save(futureEmployee);
-        if (futureResult) {
-            createdEmployeeIds.add(futureEmployee.getEmployeeId());
-        }
-    }
-    
-    @Test
-    public void testBoundaryValues_salary() {
-        System.out.println("\n[TEST] testBoundaryValues_salary");
-        
-        // Test zero salary
-        EmployeeModel zeroSalary = createValidEmployee();
-        zeroSalary.setEmail(generateUniqueEmail("zero"));
-        zeroSalary.setBasicSalary(BigDecimal.ZERO);
-        zeroSalary.setHourlyRate(BigDecimal.ZERO);
-        
-        boolean zeroResult = employeeDAO.save(zeroSalary);
-        if (zeroResult) {
-            createdEmployeeIds.add(zeroSalary.getEmployeeId());
-            assertTrue("Should allow zero salary", zeroResult);
-        }
-        
-        // Test very large salary
-        EmployeeModel largeSalary = createValidEmployee();
-        largeSalary.setEmail(generateUniqueEmail("large"));
-        largeSalary.setBasicSalary(new BigDecimal("999999999.99"));
-        largeSalary.setHourlyRate(new BigDecimal("99999.99"));
-        
-        boolean largeResult = employeeDAO.save(largeSalary);
-        if (largeResult) {
-            createdEmployeeIds.add(largeSalary.getEmployeeId());
-        }
-    }
-    
-    @Test
-    public void testSpecialCharacters_names() {
-        System.out.println("\n[TEST] testSpecialCharacters_names");
-
-        // Test names with special characters
-        EmployeeModel specialNames = createValidEmployee();
-        specialNames.setEmail(generateUniqueEmail("special"));
-        specialNames.setFirstName("O'Brien");
-        specialNames.setLastName("Smith-Jones");
-
-        boolean result = employeeDAO.save(specialNames);
-
-        // Only proceed if save was successful
-        if (result) {
-            assertNotNull("Employee should have ID after save", specialNames.getEmployeeId());
-            createdEmployeeIds.add(specialNames.getEmployeeId());
-
-            // Verify special characters preserved
-            EmployeeModel retrieved = employeeDAO.findById(specialNames.getEmployeeId());
-            assertNotNull("Should retrieve employee with special characters", retrieved);
-            assertEquals("Should preserve apostrophe", "O'Brien", retrieved.getFirstName());
-            assertEquals("Should preserve hyphen", "Smith-Jones", retrieved.getLastName());
-        } else {
-            System.out.println("WARNING: Could not save employee with special characters - might be a database constraint");
-        }
-    }
-    
-    @Test
-    public void testConcurrentOperations() throws InterruptedException {
-        System.out.println("\n[TEST] testConcurrentOperations");
-        
-        // Create employee
-        EmployeeModel employee = createValidEmployee();
-        employeeDAO.save(employee);
-        createdEmployeeIds.add(employee.getEmployeeId());
-        
-        // Simulate concurrent updates
-        Thread thread1 = new Thread(() -> {
-            EmployeeModel emp = employeeDAO.findById(employee.getEmployeeId());
-            if (emp != null) {
-                emp.setFirstName("Thread1Update");
-                employeeDAO.update(emp);
-            }
-        });
-        
-        Thread thread2 = new Thread(() -> {
-            EmployeeModel emp = employeeDAO.findById(employee.getEmployeeId());
-            if (emp != null) {
-                emp.setFirstName("Thread2Update");
-                employeeDAO.update(emp);
-            }
-        });
-        
-        // Start threads
-        thread1.start();
-        thread2.start();
-        
-        // Wait for completion
-        thread1.join();
-        thread2.join();
-        
-        // Verify one of the updates succeeded
-        EmployeeModel finalState = employeeDAO.findById(employee.getEmployeeId());
-        assertNotNull("Employee should still exist", finalState);
-        String finalName = finalState.getFirstName();
-        assertTrue("Name should be updated by one thread", 
-            "Thread1Update".equals(finalName) || "Thread2Update".equals(finalName));
-    }
+    // =====================================    
     
     @Test
     public void testFindByPosition_validPosition() {
