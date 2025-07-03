@@ -26,7 +26,7 @@ import oop.classes.management.AttendanceTracking;
  * 
  * @author USER
  */
-public class AttendanceTrackingGUI extends javax.swing.JFrame {
+public class AttendanceTrackingSupervisorGUI extends javax.swing.JFrame {
     
     // Fields for polymorphic implementation
     private User loggedInUser;
@@ -77,7 +77,7 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
     /**
      * Default constructor for NetBeans GUI builder
      */
-    public AttendanceTrackingGUI() {
+    public AttendanceTrackingSupervisorGUI() {
         initComponents();
         // Makes table uneditable
         AttendanceTrckrHRTbl.setDefaultEditor(Object.class, null); // This disables editing for all cell types
@@ -92,7 +92,7 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
      * 
      * @param user The logged-in user (either HR or Immediate Supervisor)
      */
-    public AttendanceTrackingGUI(User user) {
+    public AttendanceTrackingSupervisorGUI(User user) {
         initComponents();
         
         // Makes table uneditable
@@ -685,7 +685,11 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         IDNoTrckrHR = new javax.swing.JLabel();
         InputIDNo = new javax.swing.JTextField();
+        denyattndncbtnHR = new javax.swing.JButton();
         findEmployeeBtn = new javax.swing.JButton();
+        approveattndncbtnHR1 = new javax.swing.JButton();
+        approveAllBttn = new javax.swing.JButton();
+        denyAllBttn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         IDNoTrckrHR1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -755,6 +759,16 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
+        denyattndncbtnHR.setBackground(new java.awt.Color(207, 10, 10));
+        denyattndncbtnHR.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        denyattndncbtnHR.setForeground(new java.awt.Color(255, 255, 255));
+        denyattndncbtnHR.setText("Deny");
+        denyattndncbtnHR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                denyattndncbtnHRActionPerformed(evt);
+            }
+        });
+
         findEmployeeBtn.setBackground(new java.awt.Color(220, 95, 0));
         findEmployeeBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         findEmployeeBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -762,6 +776,36 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
         findEmployeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 findEmployeeBtnActionPerformed(evt);
+            }
+        });
+
+        approveattndncbtnHR1.setBackground(new java.awt.Color(0, 153, 0));
+        approveattndncbtnHR1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        approveattndncbtnHR1.setForeground(new java.awt.Color(255, 255, 255));
+        approveattndncbtnHR1.setText("Approve");
+        approveattndncbtnHR1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveattndncbtnHR1ActionPerformed(evt);
+            }
+        });
+
+        approveAllBttn.setBackground(new java.awt.Color(0, 153, 0));
+        approveAllBttn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        approveAllBttn.setForeground(new java.awt.Color(255, 255, 255));
+        approveAllBttn.setText("Approve all");
+        approveAllBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approveAllBttnActionPerformed(evt);
+            }
+        });
+
+        denyAllBttn.setBackground(new java.awt.Color(207, 10, 10));
+        denyAllBttn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        denyAllBttn.setForeground(new java.awt.Color(255, 255, 255));
+        denyAllBttn.setText("Deny all");
+        denyAllBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                denyAllBttnActionPerformed(evt);
             }
         });
 
@@ -843,7 +887,7 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -851,6 +895,16 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(findEmployeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 20, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(approveAllBttn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(approveattndncbtnHR1)
+                .addGap(45, 45, 45)
+                .addComponent(denyAllBttn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(denyattndncbtnHR)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -864,7 +918,13 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(denyattndncbtnHR)
+                    .addComponent(approveattndncbtnHR1)
+                    .addComponent(approveAllBttn)
+                    .addComponent(denyAllBttn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(220, 95, 0));
@@ -944,11 +1004,236 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
         updateTableModel(); // Show all records
     }
     }//GEN-LAST:event_findEmployeeBtnActionPerformed
+    //This handles the "deny" button action.
+    private void denyattndncbtnHRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_denyattndncbtnHRActionPerformed
+        denySelectedAttendance();
+    }//GEN-LAST:event_denyattndncbtnHRActionPerformed
 
    //This handles the "Employee ID" search field.
     private void InputIDNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputIDNoActionPerformed
         filterByEmployeeID(InputIDNo.getText());
     }//GEN-LAST:event_InputIDNoActionPerformed
+
+    private void approveattndncbtnHR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveattndncbtnHR1ActionPerformed
+    approveSelectedAttendance();
+    }//GEN-LAST:event_approveattndncbtnHR1ActionPerformed
+    //This handles the "Approve all" button action.
+    private void approveAllBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveAllBttnActionPerformed
+    DefaultTableModel model = (DefaultTableModel) AttendanceTrckrHRTbl.getModel();
+    int rowCount = model.getRowCount();
+    
+    if (rowCount == 0) {
+        JOptionPane.showMessageDialog(this, 
+            "No attendance records to approve", 
+            "No Records", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    
+    // Confirm the bulk action
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "Are you sure you want to approve ALL " + rowCount + " attendance records shown in the table?",
+        "Confirm Approve All", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+    
+    if (confirm != JOptionPane.YES_OPTION) {
+        return;
+    }
+    
+    // Track success and failure
+    List<Integer> successIds = new ArrayList<>();
+    List<Integer> failedIds = new ArrayList<>();
+    
+    // Process each row in the table
+    for (int row = 0; row < rowCount; row++) {
+        try {
+            // Get the employee ID and date from the table
+            String empId = model.getValueAt(row, 0).toString();
+            String date = model.getValueAt(row, 3).toString();
+            
+            // Find the matching record ID
+            int recordId = -1;
+            for (AttendanceRecord record : attendanceRecords) {
+                if (String.valueOf(record.getEmployeeID()).equals(empId) && 
+                    record.getDate().equals(date)) {
+                    recordId = record.getId();
+                    break;
+                }
+            }
+            
+            // Skip records that are already approved
+            boolean alreadyApproved = false;
+            for (AttendanceRecord record : attendanceRecords) {
+                if (record.getId() == recordId && "Approved".equals(record.getStatus())) {
+                    alreadyApproved = true;
+                    break;
+                }
+            }
+            
+            if (alreadyApproved) {
+                continue; // Skip already approved records
+            }
+            
+            // If record found, approve it
+            if (recordId != -1) {
+                // Polymorphic call to approval method
+                boolean success = attendanceTracker.approveAttendance(recordId);
+                
+                if (success) {
+                    // Update status in our records
+                    for (AttendanceRecord record : attendanceRecords) {
+                        if (record.getId() == recordId) {
+                            record.setStatus("Approved");
+                            break;
+                        }
+                    }
+                    successIds.add(recordId);
+                } else {
+                    failedIds.add(recordId);
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("Error approving record at row " + row + ": " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    // Refresh table to show updated statuses
+    updateTableModel();
+    
+    // Show result message
+    if (failedIds.isEmpty()) {
+        if (successIds.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "All records were already approved.", 
+                "No Action Needed", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "Successfully approved " + successIds.size() + " attendance records", 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, 
+            "Approved " + successIds.size() + " records\n" +
+            "Failed to approve " + failedIds.size() + " records", 
+            "Partial Success", JOptionPane.WARNING_MESSAGE);
+    }
+    }//GEN-LAST:event_approveAllBttnActionPerformed
+    //This handles the "Deny all" button action.
+    private void denyAllBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_denyAllBttnActionPerformed
+     DefaultTableModel model = (DefaultTableModel) AttendanceTrckrHRTbl.getModel();
+    int rowCount = model.getRowCount();
+    
+    if (rowCount == 0) {
+        JOptionPane.showMessageDialog(this, 
+            "No attendance records to deny", 
+            "No Records", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    
+    // Get common reason for all denials
+    String reason = JOptionPane.showInputDialog(this, 
+        "Please provide a reason for denying ALL " + rowCount + " displayed attendance records:", 
+        "Deny All Attendances", JOptionPane.QUESTION_MESSAGE);
+    
+    if (reason == null) {
+        // User canceled the dialog
+        return;
+    }
+    
+    if (reason.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+            "A reason is required to deny attendance records", 
+            "Reason Required", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    // Confirm the bulk action
+    int confirm = JOptionPane.showConfirmDialog(this,
+        "Are you sure you want to deny ALL " + rowCount + " attendance records shown in the table?",
+        "Confirm Deny All", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+    
+    if (confirm != JOptionPane.YES_OPTION) {
+        return;
+    }
+    
+    // Track success and failure
+    List<Integer> successIds = new ArrayList<>();
+    List<Integer> failedIds = new ArrayList<>();
+    
+    // Process each row in the table
+    for (int row = 0; row < rowCount; row++) {
+        try {
+            // Get the employee ID and date from the table
+            String empId = model.getValueAt(row, 0).toString();
+            String date = model.getValueAt(row, 3).toString();
+            
+            // Find the matching record ID
+            int recordId = -1;
+            for (AttendanceRecord record : attendanceRecords) {
+                if (String.valueOf(record.getEmployeeID()).equals(empId) && 
+                    record.getDate().equals(date)) {
+                    recordId = record.getId();
+                    break;
+                }
+            }
+            
+            // Skip records that are already denied
+            boolean alreadyDenied = false;
+            for (AttendanceRecord record : attendanceRecords) {
+                if (record.getId() == recordId && "Denied".equals(record.getStatus())) {
+                    alreadyDenied = true;
+                    break;
+                }
+            }
+            
+            if (alreadyDenied) {
+                continue; // Skip already denied records
+            }
+            
+            // If record found, deny it
+            if (recordId != -1) {
+                // Polymorphic call to denial method
+                boolean success = attendanceTracker.denyAttendance(recordId, reason);
+                
+                if (success) {
+                    // Update status in our records
+                    for (AttendanceRecord record : attendanceRecords) {
+                        if (record.getId() == recordId) {
+                            record.setStatus("Denied");
+                            break;
+                        }
+                    }
+                    successIds.add(recordId);
+                } else {
+                    failedIds.add(recordId);
+                }
+            }
+        } catch (Exception ex) {
+            System.err.println("Error denying record at row " + row + ": " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    // Refresh table
+    updateTableModel();
+    
+    // Show result message
+    if (failedIds.isEmpty()) {
+        if (successIds.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "All records were already denied.", 
+                "No Action Needed", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "Successfully denied " + successIds.size() + " attendance records", 
+                "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, 
+            "Denied " + successIds.size() + " records\n" +
+            "Failed to deny " + failedIds.size() + " records", 
+            "Partial Success", JOptionPane.WARNING_MESSAGE);
+    }
+    }//GEN-LAST:event_denyAllBttnActionPerformed
 
     private void backattndncbttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backattndncbttnActionPerformed
     // Close this window
@@ -996,30 +1281,14 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AttendanceTrackingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceTrackingSupervisorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AttendanceTrackingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceTrackingSupervisorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AttendanceTrackingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceTrackingSupervisorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AttendanceTrackingGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceTrackingSupervisorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1040,7 +1309,7 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AttendanceTrackingGUI().setVisible(true);
+                new AttendanceTrackingSupervisorGUI().setVisible(true);
             }
         });
     }
@@ -1051,7 +1320,11 @@ public class AttendanceTrackingGUI extends javax.swing.JFrame {
     private javax.swing.JLabel IDNoTrckrHR1;
     private javax.swing.JLabel IDNoTrckrHR2;
     private javax.swing.JTextField InputIDNo;
+    private javax.swing.JButton approveAllBttn;
+    private javax.swing.JButton approveattndncbtnHR1;
     private javax.swing.JButton backattndncbttn;
+    private javax.swing.JButton denyAllBttn;
+    private javax.swing.JButton denyattndncbtnHR;
     private javax.swing.JButton findEmployeeBtn;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;

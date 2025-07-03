@@ -59,7 +59,7 @@ public class PayrollManagement extends javax.swing.JFrame {
         populateEmployeeDropdown();
 
         // Set default selection to current month and year
-        selectMonthJComboBox2.setSelectedItem(currentPayrollMonth.getMonth()
+        selectDateJComboBox2.setSelectedItem(currentPayrollMonth.getMonth()
             .getDisplayName(TextStyle.FULL, Locale.ENGLISH));
         selectYearJComboBox3.setSelectedItem(String.valueOf(currentPayrollMonth.getYear()));
 
@@ -101,10 +101,10 @@ public class PayrollManagement extends javax.swing.JFrame {
     private void populateEmployeeDropdown() {
         try {
             // Clear existing items
-            selectEmpJComboBox1.removeAllItems();
+            selectDepJComboBox1.removeAllItems();
             
             // Add "All" option
-            selectEmpJComboBox1.addItem("All");
+            selectDepJComboBox1.addItem("All");
             
             // Get all employees from the database
             List<Map<String, String>> allEmployees = csvProcessor.getAllEmployeeRecords();
@@ -120,7 +120,7 @@ public class PayrollManagement extends javax.swing.JFrame {
             for (Map<String, String> employee : allEmployees) {
                 String empId = employee.get("Employee ID");
                 if (empId != null && !empId.isEmpty()) {
-                    selectEmpJComboBox1.addItem(empId);
+                    selectDepJComboBox1.addItem(empId);
                 }
             }
         } catch (Exception e) {
@@ -154,10 +154,10 @@ public class PayrollManagement extends javax.swing.JFrame {
 
         try {
             // Get selected employee ID (if any)
-            String selectedEmployeeId = (String) selectEmpJComboBox1.getSelectedItem();
+            String selectedEmployeeId = (String) selectDepJComboBox1.getSelectedItem();
 
             // Get selected month and year
-            String selectedMonthStr = (String) selectMonthJComboBox2.getSelectedItem();
+            String selectedMonthStr = (String) selectDateJComboBox2.getSelectedItem();
             String selectedYearStr = (String) selectYearJComboBox3.getSelectedItem();
 
             // Set the current payroll month based on selection
@@ -434,16 +434,16 @@ public class PayrollManagement extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        selectEmpJComboBox1 = new javax.swing.JComboBox<>();
-        selectMonthJComboBox2 = new javax.swing.JComboBox<>();
-        selectYearJComboBox3 = new javax.swing.JComboBox<>();
+        selectDepJComboBox1 = new javax.swing.JComboBox<>();
+        selectDateJComboBox2 = new javax.swing.JComboBox<>();
         approveBttn = new javax.swing.JButton();
         denyBttn = new javax.swing.JButton();
         generatePayslip = new javax.swing.JButton();
         approveAllBttn = new javax.swing.JButton();
         denyAllBttn = new javax.swing.JButton();
         downloadPayslip = new javax.swing.JButton();
+        downloadPayslip1 = new javax.swing.JButton();
+        downloadPayslip2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -508,30 +508,21 @@ public class PayrollManagement extends javax.swing.JFrame {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("Select Employee");
+        jLabel2.setText("Department:");
 
-        jLabel3.setText("Select Month:");
+        jLabel3.setText("Select Date:");
 
-        jLabel4.setText("Select Year:");
-
-        selectEmpJComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "10001", "10002", "10003", "10004", "10005", "10006", "10007", "10008", "10009", "10010", "10011", "10012", "10013", "10014", "10015", "10016", "10017", "10018", "10019", "10020", "10021", "10022", "10023", "10024", "10025" }));
-        selectEmpJComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        selectDepJComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Leadership", "IT", "HR", "Accounting", "Accounts", "Sales & Marketing", "Supply Chain & Logistics", "Customer Service" }));
+        selectDepJComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectEmpJComboBox1ActionPerformed(evt);
+                selectDepJComboBox1ActionPerformed(evt);
             }
         });
 
-        selectMonthJComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        selectMonthJComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        selectDateJComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12" }));
+        selectDateJComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectMonthJComboBox2ActionPerformed(evt);
-            }
-        });
-
-        selectYearJComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2025" }));
-        selectYearJComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectYearJComboBox3ActionPerformed(evt);
+                selectDateJComboBox2ActionPerformed(evt);
             }
         });
 
@@ -588,10 +579,30 @@ public class PayrollManagement extends javax.swing.JFrame {
         downloadPayslip.setBackground(new java.awt.Color(220, 95, 0));
         downloadPayslip.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         downloadPayslip.setForeground(new java.awt.Color(255, 255, 255));
-        downloadPayslip.setText("Download Payslip");
+        downloadPayslip.setText("View Salary Details");
         downloadPayslip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 downloadPayslipActionPerformed(evt);
+            }
+        });
+
+        downloadPayslip1.setBackground(new java.awt.Color(220, 95, 0));
+        downloadPayslip1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        downloadPayslip1.setForeground(new java.awt.Color(255, 255, 255));
+        downloadPayslip1.setText("Download Payslip");
+        downloadPayslip1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downloadPayslip1ActionPerformed(evt);
+            }
+        });
+
+        downloadPayslip2.setBackground(new java.awt.Color(220, 95, 0));
+        downloadPayslip2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        downloadPayslip2.setForeground(new java.awt.Color(255, 255, 255));
+        downloadPayslip2.setText("View Generated Payslip History");
+        downloadPayslip2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downloadPayslip2ActionPerformed(evt);
             }
         });
 
@@ -601,64 +612,62 @@ public class PayrollManagement extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(selectEmpJComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(49, 49, 49)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(generatePayslip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(approveAllBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(denyAllBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(approveBttn)
+                                    .addComponent(denyBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(downloadPayslip1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(downloadPayslip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(downloadPayslip2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(selectDepJComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(selectMonthJComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(selectYearJComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(generatePayslip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(approveAllBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(denyAllBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(approveBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(denyBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(552, 552, 552)
-                            .addComponent(downloadPayslip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(selectDateJComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(5, 5, 5))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectEmpJComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectMonthJComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectYearJComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selectDepJComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectDateJComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(generatePayslip)
+                    .addComponent(downloadPayslip1))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(approveAllBttn)
+                    .addComponent(approveBttn)
                     .addComponent(downloadPayslip))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(approveBttn)
-                    .addComponent(approveAllBttn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(denyAllBttn)
-                    .addComponent(denyBttn))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(denyBttn)
+                    .addComponent(downloadPayslip2))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -704,7 +713,7 @@ public class PayrollManagement extends javax.swing.JFrame {
     // In actual/ real implementation, we would mark all employees as approved
     }//GEN-LAST:event_approveBttnActionPerformed
     // Select month filter
-    private void selectMonthJComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectMonthJComboBox2ActionPerformed
+    private void selectDateJComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectDateJComboBox2ActionPerformed
         // Reset the payslips generated when user selection changes
         payslipsGenerated = false;
         payrollApproved = false;
@@ -713,14 +722,14 @@ public class PayrollManagement extends javax.swing.JFrame {
         // Clear the table
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-    }//GEN-LAST:event_selectMonthJComboBox2ActionPerformed
+    }//GEN-LAST:event_selectDateJComboBox2ActionPerformed
 
     private void backpyrllmngmntbttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backpyrllmngmntbttnActionPerformed
         new AdminAccounting(loggedInUser).setVisible(true);
         this.dispose(); //close window
     }//GEN-LAST:event_backpyrllmngmntbttnActionPerformed
     //Select employee ID filter action 
-    private void selectEmpJComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectEmpJComboBox1ActionPerformed
+    private void selectDepJComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectDepJComboBox1ActionPerformed
         // Reset the payslips generated when user selection changes
         payslipsGenerated = false;
         payrollApproved = false;
@@ -729,19 +738,7 @@ public class PayrollManagement extends javax.swing.JFrame {
         // Clear the table
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-    }//GEN-LAST:event_selectEmpJComboBox1ActionPerformed
-
-    private void selectYearJComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectYearJComboBox3ActionPerformed
-        // Reset the payslips generated when user selection changes
-        payslipsGenerated = false;
-        payrollApproved = false;
-        updateButtonStates();
-        
-        // Clear the table
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-
-    }//GEN-LAST:event_selectYearJComboBox3ActionPerformed
+    }//GEN-LAST:event_selectDepJComboBox1ActionPerformed
     //Approve all payslips
     private void approveAllBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveAllBttnActionPerformed
         if (jTable1.getRowCount() == 0) {
@@ -849,8 +846,8 @@ public class PayrollManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_denyBttnActionPerformed
     //Generate payslip button action; basically generates or calculates all employee's payroll for a pay period
     private void generatePayslipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePayslipActionPerformed
-    String selectedEmployeeId = (String) selectEmpJComboBox1.getSelectedItem();
-    String selectedMonthStr = (String) selectMonthJComboBox2.getSelectedItem();
+    String selectedEmployeeId = (String) selectDepJComboBox1.getSelectedItem();
+    String selectedMonthStr = (String) selectDateJComboBox2.getSelectedItem();
     String selectedYearStr = (String) selectYearJComboBox3.getSelectedItem();
     
     // Show loading message
@@ -874,6 +871,14 @@ public class PayrollManagement extends javax.swing.JFrame {
         JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_generatePayslipActionPerformed
+
+    private void downloadPayslip1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadPayslip1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_downloadPayslip1ActionPerformed
+
+    private void downloadPayslip2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downloadPayslip2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_downloadPayslip2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -922,17 +927,17 @@ public class PayrollManagement extends javax.swing.JFrame {
     private javax.swing.JButton denyAllBttn;
     private javax.swing.JButton denyBttn;
     private javax.swing.JButton downloadPayslip;
+    private javax.swing.JButton downloadPayslip1;
+    private javax.swing.JButton downloadPayslip2;
     private javax.swing.JButton generatePayslip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> selectEmpJComboBox1;
-    private javax.swing.JComboBox<String> selectMonthJComboBox2;
-    private javax.swing.JComboBox<String> selectYearJComboBox3;
+    private javax.swing.JComboBox<String> selectDateJComboBox2;
+    private javax.swing.JComboBox<String> selectDepJComboBox1;
     // End of variables declaration//GEN-END:variables
 }

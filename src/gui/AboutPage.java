@@ -80,7 +80,7 @@ public class AboutPage extends javax.swing.JFrame {
         aboutusheaderLBL.setForeground(new java.awt.Color(255, 255, 255));
         aboutusheaderLBL.setText("ABOUT MOTORPH");
 
-        aboutlogoLBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/MPH LOGO 200 X 112.png"))); // NOI18N
+        aboutlogoLBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/OG Logo _ 100X124.png"))); // NOI18N
 
         backtoemppagePB.setBackground(new java.awt.Color(204, 0, 0));
         backtoemppagePB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
