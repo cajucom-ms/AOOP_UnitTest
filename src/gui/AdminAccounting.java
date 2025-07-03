@@ -261,9 +261,9 @@ public class AdminAccounting extends JFrame {
         lblWelcomeMessage.setBounds(210, 40, 600, 60);
         lblWelcomeMessage.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Top, Left, Bottom, Right padding
 
-        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/MotorLogo 81x84.png"))); // NOI18N
+        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/OG Logo _ 100X124.png"))); // NOI18N
         emppagemainPNL.add(MotorPHLogo);
-        MotorPHLogo.setBounds(790, 30, 100, 90);
+        MotorPHLogo.setBounds(780, 20, 150, 100);
 
         payrollManagement.setBackground(new java.awt.Color(153, 0, 0));
         payrollManagement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
