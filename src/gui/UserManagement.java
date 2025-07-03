@@ -235,9 +235,9 @@ public class UserManagement extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         InputEmpNameTrckrHR = new javax.swing.JLabel();
         inputName = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         EmpNameTrckrHR = new javax.swing.JLabel();
         InputEmpNameTrckrHR1 = new javax.swing.JLabel();
-        inputNameHR = new javax.swing.JTextField();
         editUserBtn = new javax.swing.JButton();
         findEmployeeBtn = new javax.swing.JButton();
         createNewUserBtn = new javax.swing.JButton();
@@ -276,7 +276,7 @@ public class UserManagement extends javax.swing.JFrame {
 
         IDNoTrckrHR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         IDNoTrckrHR.setForeground(new java.awt.Color(255, 255, 255));
-        IDNoTrckrHR.setText("ID #:");
+        IDNoTrckrHR.setText("Search:");
 
         InputIDNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,8 +292,8 @@ public class UserManagement extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(IDNoTrckrHR)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(InputIDNo, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(InputIDNo, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,28 +311,24 @@ public class UserManagement extends javax.swing.JFrame {
 
         inputName.setBackground(new java.awt.Color(220, 95, 0));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Leadership", "IT", "HR", "Accounting", "Accounts", "Sales & Marketing", "Supply Chain & Logistics", "Customer Service" }));
+
         EmpNameTrckrHR.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         EmpNameTrckrHR.setForeground(new java.awt.Color(255, 255, 255));
-        EmpNameTrckrHR.setText("Name:");
+        EmpNameTrckrHR.setText("Department:");
 
         InputEmpNameTrckrHR1.setForeground(new java.awt.Color(255, 255, 255));
-
-        inputNameHR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputNameHRActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout inputNameLayout = new javax.swing.GroupLayout(inputName);
         inputName.setLayout(inputNameLayout);
         inputNameLayout.setHorizontalGroup(
             inputNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inputNameLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(EmpNameTrckrHR)
                 .addGap(12, 12, 12)
-                .addComponent(inputNameHR, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmpNameTrckrHR)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(157, 157, 157)
                 .addComponent(InputEmpNameTrckrHR1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -343,7 +339,7 @@ public class UserManagement extends javax.swing.JFrame {
                 .addGroup(inputNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EmpNameTrckrHR)
                     .addComponent(InputEmpNameTrckrHR1)
-                    .addComponent(inputNameHR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -354,7 +350,7 @@ public class UserManagement extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addComponent(InputEmpNameTrckrHR, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(1, 1, 1)
@@ -387,7 +383,7 @@ public class UserManagement extends javax.swing.JFrame {
         findEmployeeBtn.setBackground(new java.awt.Color(220, 95, 0));
         findEmployeeBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         findEmployeeBtn.setForeground(new java.awt.Color(255, 255, 255));
-        findEmployeeBtn.setText("Find employee");
+        findEmployeeBtn.setText("Find Employee");
         findEmployeeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 findEmployeeBtnActionPerformed(evt);
@@ -420,24 +416,25 @@ public class UserManagement extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(324, 324, 324)
-                        .addComponent(findEmployeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 18, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(306, 306, 306)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(createNewUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(356, 356, 356)
+                .addComponent(findEmployeeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(315, 315, 315)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(editUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteUserBtn)))
+                        .addComponent(deleteUserBtn))
+                    .addComponent(createNewUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -486,7 +483,7 @@ public class UserManagement extends javax.swing.JFrame {
                 .addComponent(backattndncbttn)
                 .addGap(39, 39, 39)
                 .addComponent(jLabel1)
-                .addContainerGap(564, Short.MAX_VALUE))
+                .addContainerGap(567, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -629,11 +626,8 @@ public class UserManagement extends javax.swing.JFrame {
             "No User Selected", JOptionPane.WARNING_MESSAGE);
     }
     }//GEN-LAST:event_editUserBtnActionPerformed
-    //This handles the "Name" search field.
-    private void inputNameHRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNameHRActionPerformed
-           filterByEmployeeName(inputNameHR.getText());      
-    }//GEN-LAST:event_inputNameHRActionPerformed
-    //This handles the "Employee ID" search field.
+
+   //This handles the "Employee ID" search field.
     private void InputIDNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputIDNoActionPerformed
            filterByEmployeeID(InputIDNo.getText());
     }//GEN-LAST:event_InputIDNoActionPerformed
@@ -833,7 +827,7 @@ public class UserManagement extends javax.swing.JFrame {
     private javax.swing.JButton editUserBtn;
     private javax.swing.JButton findEmployeeBtn;
     private javax.swing.JPanel inputName;
-    private javax.swing.JTextField inputNameHR;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

@@ -243,9 +243,9 @@ public class AdminSupervisor extends JFrame {
         emppagemainPNL.add(redOrangeDesign);
         redOrangeDesign.setBounds(-10, -20, 510, 500);
 
-        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/MotorLogo 81x84.png"))); // NOI18N
+        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/OG Logo _ 100X124.png"))); // NOI18N
         emppagemainPNL.add(MotorPHLogo);
-        MotorPHLogo.setBounds(790, 30, 100, 90);
+        MotorPHLogo.setBounds(760, 30, 130, 90);
 
         leaveRequestManagement.setBackground(new java.awt.Color(153, 0, 0));
         leaveRequestManagement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -371,13 +371,13 @@ public class AdminSupervisor extends JFrame {
     }//GEN-LAST:event_requestleaveemppgPBActionPerformed
 
     private void leaveRequestManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaveRequestManagementActionPerformed
-    new LeaveRequestManagementGUI(loggedInUser).setVisible(true);
+    new LeaveRequestManagementSupervisorGUI(loggedInUser).setVisible(true);
     this.dispose(); // Close this window
     }//GEN-LAST:event_leaveRequestManagementActionPerformed
 
     private void attendanceeTrackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceeTrackingActionPerformed
      // Pass parameters of logeedInUser and allows for polymorphic behavior (HR & Imemdiate Supervisor)
-        new AttendanceTrackingGUI(loggedInUser).setVisible(true);   
+        new AttendanceTrackingSupervisorGUI(loggedInUser).setVisible(true);   
         this.dispose(); // Close this window
     }//GEN-LAST:event_attendanceeTrackingActionPerformed
 

@@ -163,7 +163,7 @@
             <Component class="javax.swing.JLabel" name="aboutlogoLBL">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/media/MPH LOGO 200 X 112.png"/>
+                  <Image iconType="3" name="/media/OG Logo _ 100X124.png"/>
                 </Property>
               </Properties>
             </Component>

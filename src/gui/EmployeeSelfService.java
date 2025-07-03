@@ -237,9 +237,9 @@ public class EmployeeSelfService extends JFrame {
         emppagemainPNL.add(redOrangeDesign);
         redOrangeDesign.setBounds(-80, -40, 510, 520);
 
-        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/MotorLogo 81x84.png"))); // NOI18N
+        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/OG Logo _ 100X124.png"))); // NOI18N
         emppagemainPNL.add(MotorPHLogo);
-        MotorPHLogo.setBounds(730, 50, 100, 90);
+        MotorPHLogo.setBounds(730, 50, 130, 90);
 
         lblWelcomeMessage.setBackground(new java.awt.Color(0, 0, 51));
         lblWelcomeMessage.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
