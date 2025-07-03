@@ -453,9 +453,7 @@ public class ViewPayslip extends javax.swing.JFrame {
         inputpaysliplastnm = new javax.swing.JLabel();
         inputpayslipposition = new javax.swing.JLabel();
         payslipselectmonth = new javax.swing.JLabel();
-        payslipselectyear = new javax.swing.JLabel();
         monthcombo = new javax.swing.JComboBox<>();
-        yearcombo = new javax.swing.JComboBox<>();
         viewpayslipbtn = new javax.swing.JButton();
         downloadpayslipbtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -498,7 +496,7 @@ public class ViewPayslip extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(backpayslipbttn))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -523,23 +521,13 @@ public class ViewPayslip extends javax.swing.JFrame {
 
         inputpayslipposition.setText(". . .");
 
-        payslipselectmonth.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        payslipselectmonth.setText("Select Month:");
+        payslipselectmonth.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        payslipselectmonth.setText("Select Date:");
 
-        payslipselectyear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        payslipselectyear.setText("Select Year:");
-
-        monthcombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        monthcombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12" }));
         monthcombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 monthcomboActionPerformed(evt);
-            }
-        });
-
-        yearcombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023", "2024", "2025" }));
-        yearcombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearcomboActionPerformed(evt);
             }
         });
 
@@ -576,19 +564,19 @@ public class ViewPayslip extends javax.swing.JFrame {
                             .addComponent(payslipempid)
                             .addComponent(payslipfirstnm)
                             .addComponent(paysliplastnm)
-                            .addComponent(paysliposition)
-                            .addComponent(payslipselectmonth)
-                            .addComponent(monthcombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
+                            .addComponent(paysliposition))
+                        .addGap(50, 50, 50)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(yearcombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(payslipselectyear)
                             .addComponent(inputpayslipposition)
                             .addComponent(inputpaysliplastnm)
                             .addComponent(inputpayslipfirstnm)
                             .addComponent(inputpayslipempid)))
-                    .addComponent(downloadpayslipbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                    .addComponent(downloadpayslipbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(payslipselectmonth, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(monthcombo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
         );
@@ -617,14 +605,10 @@ public class ViewPayslip extends javax.swing.JFrame {
                             .addComponent(paysliposition)
                             .addComponent(inputpayslipposition))
                         .addGap(89, 89, 89)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(payslipselectmonth)
-                            .addComponent(payslipselectyear))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(monthcombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yearcombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                            .addComponent(monthcombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56)
                         .addComponent(viewpayslipbtn)
                         .addGap(18, 18, 18)
                         .addComponent(downloadpayslipbtn)))
@@ -635,7 +619,7 @@ public class ViewPayslip extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -700,13 +684,6 @@ public class ViewPayslip extends javax.swing.JFrame {
             jTextArea1.setText("Month changed. Click 'View Payslip' to generate payslip for the selected period.");
         }
     }//GEN-LAST:event_monthcomboActionPerformed
-
-    private void yearcomboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearcomboActionPerformed
-        // Clear any existing payslip data
-        if (jTextArea1.getText().contains("NET PAY:")) {
-            jTextArea1.setText("Year changed. Click 'View Payslip' to generate payslip for the selected period.");
-        }
-    }//GEN-LAST:event_yearcomboActionPerformed
 
     private void backpayslipbttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backpayslipbttnActionPerformed
         navigateBack();
@@ -785,8 +762,6 @@ public class ViewPayslip extends javax.swing.JFrame {
     private javax.swing.JLabel paysliplastnm;
     private javax.swing.JLabel paysliposition;
     private javax.swing.JLabel payslipselectmonth;
-    private javax.swing.JLabel payslipselectyear;
     private javax.swing.JButton viewpayslipbtn;
-    private javax.swing.JComboBox<String> yearcombo;
     // End of variables declaration//GEN-END:variables
 }

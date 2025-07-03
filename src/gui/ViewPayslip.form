@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" pref="742" max="32767" attributes="0"/>
+          <Component id="jPanel1" pref="749" max="32767" attributes="0"/>
           <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -69,7 +69,7 @@
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="backpayslipbttn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <EmptySpace pref="10" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -125,13 +125,9 @@
                               <Component id="payslipfirstnm" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="paysliplastnm" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="paysliposition" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="payslipselectmonth" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="monthcombo" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="yearcombo" min="-2" max="-2" attributes="0"/>
-                              <Component id="payslipselectyear" min="-2" max="-2" attributes="0"/>
                               <Component id="inputpayslipposition" min="-2" max="-2" attributes="0"/>
                               <Component id="inputpaysliplastnm" min="-2" max="-2" attributes="0"/>
                               <Component id="inputpayslipfirstnm" min="-2" max="-2" attributes="0"/>
@@ -139,8 +135,13 @@
                           </Group>
                       </Group>
                       <Component id="downloadpayslipbtn" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="payslipselectmonth" min="-2" pref="81" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="monthcombo" min="-2" pref="127" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="136" max="32767" attributes="0"/>
+                  <EmptySpace pref="124" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="280" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               </Group>
@@ -176,16 +177,11 @@
                               <Component id="inputpayslipposition" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="payslipselectmonth" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="payslipselectyear" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="payslipselectmonth" min="-2" max="-2" attributes="0"/>
+                              <Component id="monthcombo" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="monthcombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="yearcombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           <Component id="viewpayslipbtn" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="downloadpayslipbtn" min="-2" max="-2" attributes="0"/>
@@ -252,60 +248,28 @@
         <Component class="javax.swing.JLabel" name="payslipselectmonth">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
+              <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Select Month:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="payslipselectyear">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Select Year:"/>
+            <Property name="text" type="java.lang.String" value="Select Date:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="monthcombo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="12">
-                <StringItem index="0" value="January"/>
-                <StringItem index="1" value="February"/>
-                <StringItem index="2" value="March"/>
-                <StringItem index="3" value="April"/>
-                <StringItem index="4" value="May"/>
-                <StringItem index="5" value="June"/>
-                <StringItem index="6" value="July"/>
-                <StringItem index="7" value="August"/>
-                <StringItem index="8" value="September"/>
-                <StringItem index="9" value="October"/>
-                <StringItem index="10" value="November"/>
-                <StringItem index="11" value="December"/>
+              <StringArray count="8">
+                <StringItem index="0" value="All"/>
+                <StringItem index="1" value="2024-06"/>
+                <StringItem index="2" value="2024-07"/>
+                <StringItem index="3" value="2024-08"/>
+                <StringItem index="4" value="2024-09"/>
+                <StringItem index="5" value="2024-10"/>
+                <StringItem index="6" value="2024-11"/>
+                <StringItem index="7" value="2024-12"/>
               </StringArray>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="monthcomboActionPerformed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="yearcombo">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="6">
-                <StringItem index="0" value="2020"/>
-                <StringItem index="1" value="2021"/>
-                <StringItem index="2" value="2022"/>
-                <StringItem index="3" value="2023"/>
-                <StringItem index="4" value="2024"/>
-                <StringItem index="5" value="2025"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="yearcomboActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
