@@ -79,12 +79,12 @@ public class AdminSupervisor extends JFrame {
         payrollemppgPB = new javax.swing.JButton();
         requestleaveemppgPB = new javax.swing.JButton();
         redOrangeDesign = new javax.swing.JLabel();
-        MotorPHLogo = new javax.swing.JLabel();
         leaveRequestManagement = new javax.swing.JButton();
         attendanceeTracking = new javax.swing.JButton();
         emppagemenuPNL1 = new javax.swing.JPanel();
         lblWelcomeMessage = new javax.swing.JLabel();
         jLabelEmpName = new javax.swing.JLabel();
+        MotorPHLogo = new javax.swing.JLabel();
 
         jPopupMenu1.setBackground(new java.awt.Color(0, 0, 0));
         jPopupMenu1.setToolTipText("MENU BAR");
@@ -243,10 +243,6 @@ public class AdminSupervisor extends JFrame {
         emppagemainPNL.add(redOrangeDesign);
         redOrangeDesign.setBounds(-10, -20, 510, 500);
 
-        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/MotorLogo 81x84.png"))); // NOI18N
-        emppagemainPNL.add(MotorPHLogo);
-        MotorPHLogo.setBounds(790, 30, 100, 90);
-
         leaveRequestManagement.setBackground(new java.awt.Color(153, 0, 0));
         leaveRequestManagement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         leaveRequestManagement.setForeground(new java.awt.Color(255, 255, 255));
@@ -309,6 +305,10 @@ public class AdminSupervisor extends JFrame {
         jLabelEmpName.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         emppagemainPNL.add(jLabelEmpName);
         jLabelEmpName.setBounds(220, 100, 570, 25);
+
+        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/OG Logo _ 100X124.png"))); // NOI18N
+        emppagemainPNL.add(MotorPHLogo);
+        MotorPHLogo.setBounds(780, 20, 150, 100);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

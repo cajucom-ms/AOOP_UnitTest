@@ -75,7 +75,6 @@ public class AdminAccounting extends JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         emppagemainPNL = new javax.swing.JPanel();
-        emppagemenuPNL = new javax.swing.JPanel();
         specialaccessPNL = new javax.swing.JPanel();
         dateTimejLabel = new javax.swing.JLabel();
         employeepagenameLBL = new javax.swing.JLabel();
@@ -89,7 +88,6 @@ public class AdminAccounting extends JFrame {
         lblWelcomeMessage = new javax.swing.JLabel();
         MotorPHLogo = new javax.swing.JLabel();
         payrollManagement = new javax.swing.JButton();
-        emppagemenuPNL1 = new javax.swing.JPanel();
         jLabelEmpName = new javax.swing.JLabel();
 
         jPopupMenu1.setBackground(new java.awt.Color(0, 0, 0));
@@ -103,23 +101,6 @@ public class AdminAccounting extends JFrame {
         emppagemainPNL.setForeground(new java.awt.Color(51, 51, 51));
         emppagemainPNL.setToolTipText("");
         emppagemainPNL.setLayout(null);
-
-        emppagemenuPNL.setBackground(new java.awt.Color(208, 12, 12));
-        emppagemenuPNL.setForeground(new java.awt.Color(51, 51, 55));
-
-        javax.swing.GroupLayout emppagemenuPNLLayout = new javax.swing.GroupLayout(emppagemenuPNL);
-        emppagemenuPNL.setLayout(emppagemenuPNLLayout);
-        emppagemenuPNLLayout.setHorizontalGroup(
-            emppagemenuPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        emppagemenuPNLLayout.setVerticalGroup(
-            emppagemenuPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-        );
-
-        emppagemainPNL.add(emppagemenuPNL);
-        emppagemenuPNL.setBounds(0, 0, 70, 520);
 
         specialaccessPNL.setBackground(new java.awt.Color(158, 12, 12));
         specialaccessPNL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -247,7 +228,7 @@ public class AdminAccounting extends JFrame {
         redOrangeDesign.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         redOrangeDesign.setPreferredSize(new java.awt.Dimension(725, 500));
         emppagemainPNL.add(redOrangeDesign);
-        redOrangeDesign.setBounds(-10, -20, 510, 500);
+        redOrangeDesign.setBounds(0, -10, 510, 500);
 
         lblWelcomeMessage.setBackground(new java.awt.Color(0, 0, 51));
         lblWelcomeMessage.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -278,23 +259,6 @@ public class AdminAccounting extends JFrame {
         emppagemainPNL.add(payrollManagement);
         payrollManagement.setBounds(630, 140, 270, 80);
 
-        emppagemenuPNL1.setBackground(new java.awt.Color(188, 12, 12));
-        emppagemenuPNL1.setForeground(new java.awt.Color(51, 51, 55));
-
-        javax.swing.GroupLayout emppagemenuPNL1Layout = new javax.swing.GroupLayout(emppagemenuPNL1);
-        emppagemenuPNL1.setLayout(emppagemenuPNL1Layout);
-        emppagemenuPNL1Layout.setHorizontalGroup(
-            emppagemenuPNL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        emppagemenuPNL1Layout.setVerticalGroup(
-            emppagemenuPNL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
-        );
-
-        emppagemainPNL.add(emppagemenuPNL1);
-        emppagemenuPNL1.setBounds(110, 0, 70, 480);
-
         jLabelEmpName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelEmpName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelEmpName.setText("Employee Name");
@@ -316,8 +280,8 @@ public class AdminAccounting extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(emppagemainPNL, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(emppagemainPNL, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -391,8 +355,6 @@ public class AdminAccounting extends JFrame {
     private javax.swing.JLabel dateTimejLabel;
     private javax.swing.JLabel employeepagenameLBL;
     private javax.swing.JPanel emppagemainPNL;
-    private javax.swing.JPanel emppagemenuPNL;
-    private javax.swing.JPanel emppagemenuPNL1;
     private javax.swing.JLabel jLabelEmpName;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel lblWelcomeMessage;

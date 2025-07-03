@@ -80,10 +80,10 @@ public class AdminIT extends JFrame {
         requestleaveemppgPB = new javax.swing.JButton();
         redOrangeDesign = new javax.swing.JLabel();
         lblWelcomeMessage = new javax.swing.JLabel();
-        MotorPHLogo = new javax.swing.JLabel();
         userManagement = new javax.swing.JButton();
         jLabelEmpName = new javax.swing.JLabel();
         emppagemenuPNL1 = new javax.swing.JPanel();
+        MotorPHLogo1 = new javax.swing.JLabel();
 
         jPopupMenu1.setBackground(new java.awt.Color(0, 0, 0));
         jPopupMenu1.setToolTipText("MENU BAR");
@@ -254,10 +254,6 @@ public class AdminIT extends JFrame {
         lblWelcomeMessage.setBounds(210, 40, 600, 60);
         lblWelcomeMessage.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Top, Left, Bottom, Right padding
 
-        MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/MotorLogo 81x84.png"))); // NOI18N
-        emppagemainPNL.add(MotorPHLogo);
-        MotorPHLogo.setBounds(790, 30, 100, 90);
-
         userManagement.setBackground(new java.awt.Color(153, 0, 0));
         userManagement.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         userManagement.setForeground(new java.awt.Color(255, 255, 255));
@@ -295,6 +291,10 @@ public class AdminIT extends JFrame {
 
         emppagemainPNL.add(emppagemenuPNL1);
         emppagemenuPNL1.setBounds(110, 0, 70, 480);
+
+        MotorPHLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/OG Logo _ 100X124.png"))); // NOI18N
+        emppagemainPNL.add(MotorPHLogo1);
+        MotorPHLogo1.setBounds(780, 20, 150, 100);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -378,7 +378,7 @@ public class AdminIT extends JFrame {
 
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel MotorPHLogo;
+    private javax.swing.JLabel MotorPHLogo1;
     private javax.swing.JButton aboutPB;
     private javax.swing.JButton attendanceemppgPB;
     private javax.swing.JLabel dateTimejLabel;
