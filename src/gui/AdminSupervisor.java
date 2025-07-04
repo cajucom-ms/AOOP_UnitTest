@@ -68,7 +68,6 @@ public class AdminSupervisor extends JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         emppagemainPNL = new javax.swing.JPanel();
-        emppagemenuPNL = new javax.swing.JPanel();
         specialaccessPNL = new javax.swing.JPanel();
         dateTimejLabel = new javax.swing.JLabel();
         employeepagenameLBL = new javax.swing.JLabel();
@@ -82,7 +81,6 @@ public class AdminSupervisor extends JFrame {
         MotorPHLogo = new javax.swing.JLabel();
         leaveRequestManagement = new javax.swing.JButton();
         attendanceeTracking = new javax.swing.JButton();
-        emppagemenuPNL1 = new javax.swing.JPanel();
         lblWelcomeMessage = new javax.swing.JLabel();
         jLabelEmpName = new javax.swing.JLabel();
 
@@ -97,23 +95,6 @@ public class AdminSupervisor extends JFrame {
         emppagemainPNL.setForeground(new java.awt.Color(51, 51, 51));
         emppagemainPNL.setToolTipText("");
         emppagemainPNL.setLayout(null);
-
-        emppagemenuPNL.setBackground(new java.awt.Color(208, 12, 12));
-        emppagemenuPNL.setForeground(new java.awt.Color(51, 51, 55));
-
-        javax.swing.GroupLayout emppagemenuPNLLayout = new javax.swing.GroupLayout(emppagemenuPNL);
-        emppagemenuPNL.setLayout(emppagemenuPNLLayout);
-        emppagemenuPNLLayout.setHorizontalGroup(
-            emppagemenuPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        emppagemenuPNLLayout.setVerticalGroup(
-            emppagemenuPNLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-        );
-
-        emppagemainPNL.add(emppagemenuPNL);
-        emppagemenuPNL.setBounds(0, 0, 70, 520);
 
         specialaccessPNL.setBackground(new java.awt.Color(158, 12, 12));
         specialaccessPNL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -241,7 +222,7 @@ public class AdminSupervisor extends JFrame {
         redOrangeDesign.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         redOrangeDesign.setPreferredSize(new java.awt.Dimension(725, 500));
         emppagemainPNL.add(redOrangeDesign);
-        redOrangeDesign.setBounds(-10, -20, 510, 500);
+        redOrangeDesign.setBounds(0, -10, 510, 500);
 
         MotorPHLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/OG Logo _ 100X124.png"))); // NOI18N
         emppagemainPNL.add(MotorPHLogo);
@@ -272,23 +253,6 @@ public class AdminSupervisor extends JFrame {
         });
         emppagemainPNL.add(attendanceeTracking);
         attendanceeTracking.setBounds(630, 140, 270, 80);
-
-        emppagemenuPNL1.setBackground(new java.awt.Color(188, 12, 12));
-        emppagemenuPNL1.setForeground(new java.awt.Color(51, 51, 55));
-
-        javax.swing.GroupLayout emppagemenuPNL1Layout = new javax.swing.GroupLayout(emppagemenuPNL1);
-        emppagemenuPNL1.setLayout(emppagemenuPNL1Layout);
-        emppagemenuPNL1Layout.setHorizontalGroup(
-            emppagemenuPNL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
-        );
-        emppagemenuPNL1Layout.setVerticalGroup(
-            emppagemenuPNL1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
-        );
-
-        emppagemainPNL.add(emppagemenuPNL1);
-        emppagemenuPNL1.setBounds(110, 0, 70, 480);
 
         lblWelcomeMessage.setBackground(new java.awt.Color(0, 0, 51));
         lblWelcomeMessage.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
@@ -405,8 +369,6 @@ public class AdminSupervisor extends JFrame {
     private javax.swing.JLabel dateTimejLabel;
     private javax.swing.JLabel employeepagenameLBL;
     private javax.swing.JPanel emppagemainPNL;
-    private javax.swing.JPanel emppagemenuPNL;
-    private javax.swing.JPanel emppagemenuPNL1;
     private javax.swing.JLabel jLabelEmpName;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel lblWelcomeMessage;
